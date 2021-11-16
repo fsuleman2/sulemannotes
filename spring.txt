@@ -1,0 +1,17 @@
+1) The client sends an HTTP request to a specific URL
+2) DispatcherServlet of Spring MVC receives the request
+
+2) It passes the request to a specific controller depending on the URL requested using @Controller and @RequestMapping annotations.
+
+3) Spring MVC Controller then returns a logical view name and model to DispatcherServlet.
+
+4) DispatcherServlet consults view resolvers until actual View is determined to render the output
+
+5) DispatcherServlet contacts the chosen view (like Thymeleaf, Freemarker, JSP) with model data and it renders the output depending on the model data
+
+6) The rendered output is returned to the client as a response
+
+
+Read more: https://javarevisited.blogspot.com/2017/06/how-spring-mvc-framework-works-web-flow.html#ixzz790fLYBZZ
+Top 21 Spring Interview Questions
+https://medium.com/javarevisited/21-spring-mvc-rest-interview-questions-answers-for-beginners-and-experienced-developers-21ad3d4c9b82

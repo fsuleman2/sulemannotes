@@ -1,0 +1,365 @@
+hibernate.cfg.xml
+<?xml version='1.0' encoding='UTF-8'?>    
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"> 
+<hibernate-configuration>    
+    <session-factory>    
+        <property name="hbm2ddl.auto">update</property>       
+        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres?currentSchema=revature</property>    
+        <property name="connection.username">postgres</property>    
+        <property name="connection.password">root12345</property>   
+        <property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property> 
+        <property name="connection.driver_class">org.postgresql.Driver</property>       
+   		<!-- Mapping class > -->
+   		<mapping class="com.demo.model.Employee"/>
+    </session-factory>
+</hibernate-configuration>    
+
+
+hibernate.hgbm.xml
+
+<hibernate-mapping>
+	<class name="com.bank.User" table="user_table">
+		<id name ="id">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="firstname"></property>
+		<property name="lastname"></property>
+	</class>
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+//for JPA
+EnityManagerFactory emf = Persistence.createEnityManagerFactory("entity name");
+
+EnityManager em = emf.createEntityManager();
+em.getTransaction.begin();
+em.perisist(e);
+em.find();
+em.remove();
+em.getTransaction.commit();
+em.close();
+emf.close();
+----------------------------------------------------------------
+//FOR HIBERNATE
+SessionFactory sf = new Configuration.configure("hibernate.cfg.xml").BuildSessionFactory();
+
+Session session = sf.openSession();
+
+session.beginTransaction();
+
+session.persist(e);
+session.save(e);
+
+session.getTransaction.commit();
+
+session.close();
+
+sf.close();
+yaad se padhlo ye!!!
+https://www.geeksforgeeks.org/hibernate-architecture/
+
+Session factory is an interface which helps to create an instance of a session. There must be only one session factory per database. For example, if you are using MySQL and ORACLE in your application, one session factory for MySQL and one session factory for ORACLE is maintained. There will not be more than one session factory per MySQL alone.
+ buildSessionFactory() method gathers the meta-data which is in the cfg Object.
+
+The database connection from an application is created using session which also helps in saving and retrieving the persistent object.
+------------------------------------------------------------------------------
+//FOR HIBERNATE HQL
+//inserting a record
+session.beginTrasaction();
+int result = (int) session.save(e);
+session.getTransaction().commit();
+session.close();
+return result//it is holding an id;
+------------------------------------------------
+//FOR READING ALL THE RECORDS
+Query<Employee> q = session.CreateQuery("from Employee",Employee.class);
+List<Employee> list = q.getResult();
+// executeQuery --> resultset --> model class --> add to arraylist
+return list;
+------------------------------------------------------------
+//FOR Reading a record by ID
+Query<Employee> q = session.createQuery("from employee where employeeId = :empId",Employee.class);
+q.setParameter("empId",searchId);
+List<Employee> list = q.getResultList();
+return list.get(0);
+
+In hibernate, get() and load() are two methods which is used to fetch data for the given identifier.
+They both belong to Hibernate session class
+Get() method return null, If no row is available in the session cache or the database for the given identifier
+whereas load() method throws object not found exception.
+get() is slow load() is fast
+If you are not sure that object exist then use get() method.
+If you are sure that object exist then use load() method 
+get() is eager. load() is lazy
+-------------------------------------------------------------------------------
+//FOR UPDATING A RECORD
+Query q = session.createQuery("update Employee set employeeName:ename")
+q.setParameter("ename","suleman");
+int t = q.executeUpdate();
+if(t!=0){print("Details got updated")}
+------------------------------------------------------------
+//FOR DELETE  A RECORD
+Query<Employee> q = session.createQuery("delete from Employee where employeeId:eid");
+q.setParameter("eid",1);
+int t = q.executeUpdate();
+if(t!=0){print("Details got deleted")}
+=====================================================================================
+
+//FOR NATIVE QUERY
+//insert operation
+int result=(int) session.save(e);
+----------------------------------------
+//for read operation
+NativeQuery<Employee> nq = session.createNativeQuery("select * from employee_details where employeeid=?",Employee.class);
+nq.setParameter(1, searchId);
+List<Employee> e =  nq.getResultList();
+return e.get(0);
+---------------------------------------------------------------------------
+//for update operation
+NativeQuery q = session.createNativeQuery("update Employee set employeeName:ename")
+q.setParameter("ename","suleman");
+int t = q.executeUpdate();
+if(t!=0){print("Details got updated")}
+------------------------------------------------------------
+//for Delete Operation
+NativeQuery<Employee> q = session.createNativeQuery("delete from Employee where employeeId:eid");
+q.setParameter("eid",1);
+int t = q.executeUpdate();
+if(t!=0){print("Details got deleted")}
+=====================================================================================
+
+//FOR NAMEDQUERY
+Theory: 
+-> The hibernate named query is way to use any query by some meaningful name.
+-> It is like using alias names.
+-> The Hibernate framework provides the concept of named queries
+so that application programmer need not to scatter queries to all the java code.
+
+@NamedQueries annotation is used to define the multiple named queries.
+@NamedQuery annotation is used to define the single named query.
+Step 1: in the com.ems.model.Employee class after @Entity before class Employee
+	we had this Annotation
+@NamedQueries({
+	@NamedQuery(name = "select_employee", query="from employee where employeeId:empId");
+	@NamedQuery(name = "update_employee",query = "update Employee set employeeName=:ename"),
+	@NamedQuery(name = "delete_employee",query = "delete from Employee where employeeId=:eId")
+})
+
+Step 2: we go to the impl file and add this code in respective methods
+Query<Employee> q = session.getNamedQuery("select_employee");
+q.setParameter("empId",searchId);
+List<Employee> list=q.getResultList();
+=========================================================================================
+//FOR NamedNativeQuery follow the same above just add Native over there
+@Table(name = "Employee_Details")
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "native_select_employee",query = "select * from employee_details where employeeid=?",resultClass = Employee.class),
+	@NamedNativeQuery(name="native_update_employee", query = "update employee_details set employeename=?,salary=?,department=? where employeeId=?")
+})
+
+NativeQuery<Employee> nq = session.getNamedNativeQuery("native_select_employee");
+nq.setParameter(1, searchId);
+List<Employee> e =  nq.getResultList();
+System.out.println(e.get(0));
+===============================================================================================
+//CRITERA API DEMO
+Hibernate Criteria are a programmatic and typesafe way to fetch data from the relational database.
+
+In other words, criteria use explicit methods and return types to fetch data,
+, rather than requiring you to write queries as Strings that might contain typos,
+and can't be easilly parsed to determine what the resulting type of data will be.
+
+-> javax.persistence.criteria.CriteriaQuery interface provides many methods to specify criteria
+-> and the object obtained by calling the createCriteria(Class<T>) method of a
+-> javax.persistence.criteria.CriteriaBuilder
+
+//forSelect
+	builder.createQuery();
+//for update
+	builder.createCriteriaUpdate();
+//for Delete
+	builder.createCriteriaDelete();
+
+//for Select operation
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Employee> cQuery = builder.createQuery(Employee.class);
+//enity graph
+Root<Employee> root = cQuery.from(Employee.class);
+cQuery.select(root)
+.where(builder.equal(root.get("eId"),1))
+
+Query<Employee> q=session.createQuery(cQuery);
+List<Employee> list= q.getResultList();
+for (Employee employee : list) {
+System.out.println(employee);
+}
+
+===========================================================================
+2nd level (cacheEHCache)
+->add the dependency first
+-> make xml configuration
+-> To make an entity eligible for L2 caching, we annotate it @Cache annotation
+ 	and specify a cache concurrency strategy
+-> It's a best practice to annotate the entity class with @Cacheable annotation,
+ 	although not required by Hibernate.
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Entity
+@Table(name="student")
+public class Student
+{
+  //code goes here...
+}
+-> Here A  concurrency strategy it instructs hibernate on how to store objects in the cache
+and retrieve them, in an environment where multiple sessions might be trying to manipulate
+the same object simultaneously.
+READ_ONLY
+NONSTRICT_READ_ONLY
+READ_WRITE
+TRANSACTIONAL
+==============================================================================================
+-> Lazy loading is mainly used for improving the application performance by helping 
+to load the child objects on demand.
+
+-> It is to be noted that, since Hibernate 3 version, this feature has been
+ enabled by default.
+-> Lazy Loading - Associated data loads only when we explicitly call getter or size method.
+-> Use Lazy Loading when you are using one-to-many/ManyToMany collections.
+-> Use Lazy Loading when you are sure that you are not using related entities.
+-> It can be enabled by using the annotation parameter
+@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+----------------------------------------------------------------------
+Eager Loading - Data loading happens at the time of their parent is fetched.
+-> Use Eager Loading when the relations are not too much. 
+Thus, Eager Loading is a good practice to reduce further queries on the Server.
+->Use Eager Loading when you are sure that you will be using related entities 
+with the main entity everywhere.
+-> ManyToOne and OneToOne associations used eager loading strategy by default.
+-> It can be enabled by using the annotation parameter :
+
+fetch = FetchType.EAGER
+====================================================================================================
+08-10-2021 10:45AM
+Jenkins is an open source automation server. 
+It helps automate the parts of software development related to building, testing, and deploying, 
+facilitating continuous integration and continuous delivery.
+
+CI: Continuous integration (CI) is the practice of automating the integration of code changes from multiple contributors into a single software project
+
+CD: this will take the new build i.e .jar/.war file builded by CI and deploy it on to the server or local environment
+The code is then delivered quickly and seamlessly as a part of the CD process.
+to check how software is running. after successfull running we can deploy it on production server
+production server means client environment.
+
+Traditional way: Devleopment team develop the code and give it to the tester...
+testing team test the code and then give it to the operation team and they will deploy it.
+
+DevOps way : Development team and operation team made a single team and
+to code deploying testing and operation done by single team.
+
+Advantages:
+->To reduce the time 
+-> The problem with system and s/w conflict between teams also minimized.
+
+-------------------------------------------------------------------------
+Continous Integration : 
+Steps:
+1. Create a sts project
+2. push this project on github
+if you forgot the port of jenkins go to jenkins in c drive and goto wrapper.xml n look for it
+Poll SCM : if any chnages made in git it will listen it and do build in jenkins
+***** in schedule everyminute it will runs and build the code automatically
+
+CloudBees Docker Build and Publish plugin
+Docker plugin
+docker-build-step
+docker run --name fsuleman2/indianbankapp
+-------------------------------------------------------------------
+11-08-2021 10:10am to 11am
+docker deployment using jenkins
+docker run --name name_of_the_container -p port_of_docker:portnumber_of_jenkins
+$docker run --name indianbankapp -p 8899:8080 
+====================================================================
+Q)What is hibernate and why to use it?
+Hibernate is ORM tool used to map java objects to relational database tables.
+	JavaObject/POJO -----> Relational Tables
+
+Q)How mappings is done using hibernate?
+Ans: Hibernate provides JPA implementations hence we can use JPA annotations as well as xml configuration to achieve this mapping.
+
+Q)How come hibernate Uses JPA annotatons?
+Hibernate is just nothing but implmentation of JPA.
+JPA is like an interface and Hibernate just as a class.
+JPA provides what to do it, where as hibernate provide How to do it.
+
+Q)Why hibernate? why not JDBC?
+-> Hibernate eliminate all the boiler-plate code that comes with jdbc
+In JDBC as mentioned above for inserting a record, you will be creating a prepared statement And will be setting each column of a table. If the number of columns increases the statements will also increase. But in Hibernate we just need to save the object as follows.
+
+persist(Object);
+
+->It supports HQL which is more objected oriented
+Hibernate uses HQL (Hibernate Query Language) which is similar to SQL but Hibernate’s HQL provides full support to polymorphic queries. HQL understands object-oriented concepts like inheritance, polymorphism, and association.
+
+->transaction management is done implicitly.
+
+-> code Independence: Hibernate’s code is database independent because you need not change the HQL queries (exceptions are there) when you change the databases like MySQL, oracle, etc and hence it is easy to migrate to a new database. It is achieved by using a dialect to communicate with the database. The database can be specified using dialect in the Hibernate configuration XML as follows.
+
+<property name=”dialect”>org.hibernate.dialect.MySQL</property>
+
+For example, consider the following scenario. You need to fetch the first 10 entries of a table. How this is implemented in different databases is explained below
+
+Mysql: SELECT column_name FROM table_name ORDER BY column_name ASC LIMIT 10;
+
+Sql Server: SELECT TOP 10 column_name FROM table_name ORDER BY column_name ASC;
+
+In Hibernate, this can be done as follows
+Session.CreateQuery(“SELECT E.id FROM Employee E ORDER BY E.id ASC”).SetMaxResults(10).List();
+
+Thus your query statement need not change irrespective of the database you are using.
+
+-> Cacheing(1st and 2nd level): 
+Hibernate provides caching mechanism which helps to reduce the number of hits as much as possible that your application makes with the database server.There is no such caching mechanism available in JDBC.
+1) First Level Cache
+  Session object holds the first level cache data. It is enabled by default.   The first level cache data will not be available to entire application. An   application can use many session object.
+
+2) Second Level Cache
+  SessionFactory object holds the second level cache data. The data stored in   the second level cache will be available to entire application. But we need   to enable it explicitely.
+
+->Fetching(Lazy/Eager):
+ We can achieve lazy loading of data using Hibernate i.e data can be loaded only when it is needed. 
+
+Consider an example where there is a list of users in the user table. The identity proof documents uploaded by the users are stored in the identity_proof table. 
+
+The user has a ‘one to many’ relationships with the identity_proof. In this case, the user is the parent class and identity_proof is the child class.
+
+If you fetch the parent class i.e the user, all the documents associated with the user will also be fetched. 
+
+Imagine the size of each document. As the number of documents increases the size of data to be processed also increases and hence it will slow up the application.
+
+How Hibernate helps here is you can specify the fetch type for data as LAZY. 
+
+If you do so when you fetch user, documents will not be fetched. You can fetch the documents where you want using Hibernate’s initialize() method.
+
+// Declaring fetch type for one to many association in your POJO
+@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+private Set ProofList = new HashSet();
+
+// To fetch user with document use initialize() method as follows
+getHibernateTemplate().initialize(user.getProofList());
+
+->Exception: JDBC will throw SQLexception which is a checked exception. So you will be writing “try-catch” blocks in your code. Hibernate handles this by converting all JDBC exception as an unchecked exception. Therefore you need not waste your time in implementing this try catch blocks. If you are not familiar with the term checked and unchecked exceptions, please refer this link for your understanding.
+
+------------------------------------------------------------------
+@EmbeddedId: Used to define the Composite primary key in the entity bean
+<router-outlet> - works as a placeholder to load the different components dynamically based on the activated component.

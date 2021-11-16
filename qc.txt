@@ -1,0 +1,252 @@
+DI can be done in two ways:
+1) Constructor based Injection
+	Constructor injection occurs when an IoC container creates a bean, passing values as arguments within that bean's 	constructor.
+
+2) Setter Based Injection
+	 Setter injection occurs when the IoC container specifically 	invokes a bean's setter methods for the particular properties within the object
+----------------
+1) Constructor Based Injection
+i)Xml configuration
+<beans>
+	<bean id="Order" class="com.revature.model.Orders">
+	<constructor-arg ref="constrcutor parameter1"/>
+	</bean>
+	
+	//no arg constructor
+	<bean id="account" class="path"></bean>
+</bean>
+ii) Annotation Configuration
+	private Order order;
+	@Autowired
+	Public Order(constructor fields){}
+iii) Java Configuration
+	@configuration
+	@componentScan({classs quilified path})
+	@Bean(name = "orderService")
+	public OrderService(){}
+
+2)Setter based injection
+i)XML configuration
+<beans>
+
+    <bean id="accountServ" class="com.revature.services.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+    </bean>
+
+</beans>
+
+ii) Annotation Based Config
+@Autowired
+	public void setItem(Item item) {
+		this.item = item;
+	}
+iii)Java Configuration
+@Configuration
+@ComponentScan({ "com.revature.repository;com.revature.services" })
+-------------------------------------------------------------------------------
+
+@Autowired - Spring Annotation used to inject bean dependencies as needed, based on bean type.
+
+@Bean - Spring annotation which plays the same role as the element in an XML-based configuration, and you can specify an identifier for these beans with the use of the id (or name) property.
+
+@Component - Generic stereotype annotation used to declare an object as a bean.
+
+@ComponentScan - Spring Annotation which specifies path locations for defined beans to be used for potential injection.
+
+@Configuration - Spring annotation indicates a class file used to manage bean configurations using Java configuration similar to the Application Context file for an XML or annotation based configuration.
+
+@Inject - Standard Java annotation used to inject bean dependencies as needed. Equivalent to Spring's @Autowired annotation.
+
+--------------------------------------------------------------------------
+Bean Life Cycle
+Beans are managed by BeanFactory or Application Context, Includes 
+==> Instantiation bean
+	<bean id = "exampleBean" class = "examples.ExampleBean" init-method = "init"/>
+Following is the class definition -
+
+public class ExampleBean {
+   public void init() {
+      // do some initialization work
+   }
+}
+==> configuration
+==> Destruction
+void destroy() throws Exception;
+
+Bean Scopes:
+Bean configuration files act similarly to the creation of a class file, in that it is a template which can be used to instantiate objects (in this case, Spring uses this configuration to create bean objects). This configuration also extends to the defined scope of those objects. As a reminder, a scope can be seen as a sub-section of a larger application, with certain defined values, properties and objects. When defining a bean in the configuration, you have the ability to define the scope as well. For XML configurations, use the scope attribute on the bean element. Otherwise you can use the @Scope annotation to override the default (Singleton) scope for configured beans.
+
+There are Bascially 6 Scopes:
+
+1) Singleton Scope (default) - Each bean definition is scoped to a 	single object instance per Spring IoC Container.
+
+2) Prototype Scope - A single bean definition is scoped to a number of object instances.
+
+3) Request Scope [Only valid with a web-aware ApplicationContext] - A single bean definition is scoped to the lifecycle of a single HTTP request. This means the HTTP request has its own instance of a bean created from a single bean definition.
+
+4) Session Scope [Only valid with a web-aware ApplicationContext] - A single bean definition is scoped to the lifecycle of an HTTP Session.
+
+5) Gloabl Session Scope [Only valid with a web-aware ApplicationContext] - A single bean definition is scoped to the lifecycle of a global HTTP session. Generally only valid when used in a portlet context.
+
+6) Application Scope [Only valid with a web-aware ApplicationContext] - Scopes a single bean definition to the lifecycle of a ServletContext.
+
+------------------------------------------------------------------
+@Aspect
+Advice is specific action taken, defined as a method at a particular point during the execution of a program.
+@Before @AfterReturning @AfterThrowing @After execute after finally @Around (perfrom custom behaviour)
+Pointcut : expression inside @After()
+Joinpoint(Interface): after executing the aspect it hold the info for a current action.
+It has many methods
+.getKind();
+.getTarget();
+.getsignature();
+
+------------------------------------------------
+@AspectJ refers to a style of declaring aspects through the use of regular Java classes with annotations.
+--------------------------------------------------
+Lombok: Project Lombok is a java library that automatically plugs into your editor and build tools. It is helpfull in remving all the boiler plate code.
+--------------------------------------------------------
+Stereotypes are a number of built in annotations which are used as markers to declare obects as a bean, define their name and clarify to a developer what the bean will be used for.
+
+@component is a parent component and have @contoller, @service, @Repository
+It is a generic( common) stereotype annotation, inbuilt annotation to create an object, whatever class we are attaching @comp that class object will be created in IOC container.
+
+
+The @Component annotation is a generic stereotype used to declare an objects as a bean, which will be injected into other classes/beans at some point in time. 
+
+Spring also provides more specific use cases for @Component beans when the class serves a specific purpose, such as the persistance of data, a service or presentation. These annotations are @Repository, @Service and @Controller respectively.
+---------------------------------------------------
+
+@RestController annotation is a convenience stereotype annotation which combines the features of @RequestMapping with the @ResponseBody annotations. This allows the use of HTTP method specific Mapping annotations which automatically produce an XML, JSON or other response.by using @RestController we need have to use jackson library
+
+@RequestMapping 
+annotation can be configured with url mapping, http request method types, url values, and other parameters.
+@RequestMapping("/appointments")
+
+
+@RequestBody
+which allows Spring to map data from the body of a request to a defined java object.
+
+@RequestParam is used to map form field to java variables
+
+
+@PathVariable annotation can identify properties directly within the URL of a request for use within a method. To map the url parameter, the parameter should be enclosed in curly braces within the RequestMapping value and the name should match the method parameter
+
+
+Request Handling
+	@Controller
+	@RestController
+Data Binding
+	@RequestBody
+	@PathVariable
+	@RequestParam
+	@ResponseBody
+RequestMapping
+	@RequestMapping
+	@GetMapping
+	@PostMapping
+	@PutMapping
+	@DeleteMapping
+Data Transformation
+	The consumes and produces attributes of the RequestMapping 	annotations.
+----------------------------------------------------------------------
+Spring Boot:
+-> Spring Boot is an open source Spring Framework project used to rapidly create Java based, production-grade applications utilizing Spring Framework's IOC and module integrations. 
+
+-> Spring Boot simplifies the process of project startup and framework 	integration by applying highly opinionated auto-configurations for the different Spring Boot project modules like webmvc, 	data, security, messaging, etc... .
+-> webmvc integration, staring and config of a server,register your dispatcher servlet, register of view resolver etc, bean config al done by sping boot automatically.
+
+for doing above task we just need to used annotation
+@SpringBootApplication which infact is a combi of @SpringBootConfiguration, @EnableAutoConfiguration, and @ComponentScan annotations.
+
+Spring Data JPA
+for removing all the DAO boiler plate codes and Database config we have interface known as Spring Data JPA Interfaces
+
+JpaRepository->PagingAndSortingRepository->CrudRepository->Repository
+
+Spring Web Dependecny
+It is a starter Dependency which consist of Spring MVC, REST and TOMCAT dependecies and also all required web development dependencies to run our application.
+
+
+Spring Boot Actuator
+- is a Spring library that exposes tools for monitoring and gathering metrics about a running application. By using Spring Boot Actuator boilerplate operation tools like health, metrics, env, etc.. can be automatically included in an application through either HTTP or JMX (Java Management Extensions).
+
+
+
+RestTemplate
+In Spring RestTemplate acts as a web client to make requests to web services. RestTemplate offers 3 types of methods for exchanging data with web service:
+
+getForEntity
+getForEntity
+exchange API
+
+-------------------------------------
+[(ngModel)]  for two way binding
+Http API for communicating thru backend
+Http Client is a class
+modeule added : http client
+import {HttpClientModule} from '@angular/common/http';
+ HttpClientModule
+--------
+created a service
+$ng g s user
+
+adding a matsnack bar
+MatSnackBarModule
+
+npm install --save sweetalert2
+import Swal from 'sweetalert2'
+-------------------------------------------------------
+28-08-2021
+branch : loginbackend
+dependencies used:
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+user
+584ff989-c8c5-4750-9eea-778b2a61f3c0
+https://github.com/koushikkothagal/spring-security-jwt/blob/master/src/main/java/io/javabrains/springsecurityjwt/util/JwtUtil.java
+29-08-2021
+what angular interceptor does is.. before request goes to the server, angular interceoptor intercepts the request and add token inside headers automatically. we don't have to do it manually everytime.
+auth.interceptor.ts
+created two components
+/admin
+/user-dashboard
+
+angular guard is use to protect route
+normal user cannot access admin
+for admin
+inside services>
+$ng g guard admin
+Guard Name = ADMINGUARD
+
+for normal
+inside services >
+$ng g guard normal
+GUARD NAME= NORMALGUDARD
+$ng g guard normal
+canActivate() if this function is true then only that route is accessible
+bcryptpasswordencoder
+it resides in springsecurity
+
+npm install --save @ckeditor/ckeditor-5-angular
+==========================================================
+server.port=8121
+
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/postgres?currentSchema=exam_schema
+spring.datasource.username=postgres
+spring.datasource.password=root12345
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# ===============================
+# = JPA / HIBERNATE
+# ===============================
+# Show or not log for each sql query
+spring.jpa.show-sql=true
+# Hibernate ddl auto (create, create-drop, update): with "create-drop" the database
+# schema will be automatically created afresh for every start of application
+spring.jpa.hibernate.ddl-auto=create
+
+# Allows Hibernate to generate SQL optimized for a particular DBMS
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect

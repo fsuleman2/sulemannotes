@@ -1,0 +1,53 @@
+﻿1.What is containerization?
+
+Containerization is the process of packaging software code, its required dependencies, configurations, and other detail to be easily deployed in the same or another computing environment. In simpler terms, containerization is the encapsulation of an application and its required environment.
+
+2.How are containers different from virtual machines?
+
+Virtual machines and containers differ in several ways, but the primary difference is that containers provide a way to virtualize an OS so that multiple workloads can run on a single OS instance. With VMs, the hardware is being virtualized to run multiple OS instances.
+
+3.What is a Docker image? container?
+
+
+A Docker image is a file used to execute code in a Docker container. Docker images act as a set of instructions to build a Docker container, like a template. ... A Docker image contains application code, libraries, tools, dependencies and other files needed to make an application run.
+
+4.List the steps to create a Docker image and spin up a container
+
+docker pull ubuntu
+docker run ubuntu
+
+5.What is the relevance of the Dockerfile to this process? List some keywords in the Dockerfile
+
+A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build users can create an automated build that executes several command-line instructions in succession.
+
+FROM openjdk:11
+COPY ./target/indianciapp.war indianciapp.war
+CMD ["java","-jar","indianciapp.war"]
+
+6.What is the benefit to an image being built in Layers?
+
+Additionaly building an image will reuse layers if the creating command allows. This reduces the build time. For example if you copy a file into your image and the file is the same as in the last build the old layer will be reused. See the best practices for writing dockerfiles for more detail
+
+7.What are some other Docker commands?
+
+docker –version 	
+docker pull ---docker pull <image name>
+docker run--- docker run -it -d <image name>	
+docker ps	docker ps -a	
+docker exec-----docker exec -it <container id> bash
+docker stop <container id>	
+docker kill <container id>
+docker commit	docker login
+docker push	docker images
+docker rm	docker rmi
+docker build
+8.What is a container registry? How would you retrieve and upload images to DockerHub?-----#####-?
+
+A container registry is a repository, or collection of repositories, used to store container images for Kubernetes, DevOps, and container-based application development.
+
+9.What is Docker compose and why is it useful?
+
+Docker Compose is a tool that was developed to help define and share multi-container applications. With Compose, we can create a YAML file to define the services and with a single command, can spin everything up or tear it all down.
+10.If you want to store state for a container, how does Docker recommend doing that?
+
+Docker's commit command allows users to take a running container and save its current state as an image

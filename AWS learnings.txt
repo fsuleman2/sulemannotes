@@ -1,0 +1,92 @@
+1.How would you describe AWS? What is “the cloud” or “cloud computing” and why is it so   popular now?
+WS (Amazon Web Services) is a comprehensive, evolving cloud computing platform provided by Amazon that includes a mixture of infrastructure as a service (IaaS), platform as a service (PaaS) and packaged software as a service (SaaS) offerings.
+
+Cloud computing is the delivery of on-demand computing services -- from applications to storage and processing power -- typically over the internet and on a pay-as-you-go basis.
+
+
+2.Define Infrastructure, Platform, and Software as a Service
+Infrastructure as a Service (IaaS) provides the hardware to get the job done. This typically includes networking, computers, and data storage space. When you obtain IaaS, you’re paying for the parts and pieces to construct what you want, akin to going to the store and buying the products to make your own burgers.
+
+Platform as a Service (PaaS) is the next option, where the vendor provides the infrastructure, which allows you to focus on deploying and managing your application(s). Using PaaS provides freedom from hardware procurement, updating software, and capacity planning. Go buy the pre-made burger patties from the store. You still have to cook them, but a lot of the work is done for you.
+
+Software as a Service (SaaS)  SaaS vendors provide the entire package: infrastructure, the platform, and the application. This type of cloud computing removes concerns regarding infrastructure, the platform, and updates/upgrades to the service. As the customer, you are left to focus on how you’ll use the application to achieve your desired outcome.
+
+
+3.What’s the difference between a Region and an Availability Zone (AZ)?
+AWS Regions are large and widely dispersed into separate geographic locations. 
+Availability Zones are distinct locations within an AWS Region that are engineered to be isolated from failures in other Availability Zones.
+
+
+4.How are you charged for using AWS services?
+AWS offers you a pay-as-you-go approach for pricing for over 160 cloud services. ... 
+AWS pricing is similar to how you pay for utilities like water and electricity. 
+You only pay for the services you consume, and once you stop using them, there are no additional costs or termination fees.
+
+
+5.Explain the following AWS services:
+a.EC2
+Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers. ... It provides you with complete control of your computing resources and lets you run on Amazon's proven computing environment.
+
+b.EBS
+Amazon Elastic Block Store (EBS) is an easy to use, high-performance, block-storage service designed for use with Amazon Elastic Compute Cloud (EC2) for both throughput and transaction intensive workloads at any scale.
+
+c.RDS
+Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
+
+d.Route 53
+Amazon Route 53 effectively connects user requests to infrastructure running in AWS – such as Amazon EC2 instances, Elastic Load Balancing load balancers, or Amazon S3 buckets – and can also be used to route users to infrastructure outside of AWS.
+
+e.VPN
+AWS Site-to-Site VPN enables you to securely connect your on-premises network or branch office site to your Amazon Virtual Private Cloud (Amazon VPC). AWS Client VPN enables you to securely connect users to AWS or on-premises networks.
+
+f.S3 / Glacier
+Amazon S3 is a durable, secure, simple, and fast storage service, while Amazon S3 Glacier is used for archiving solutions. Use S3 if you need low latency or frequent access to your data. ... You can store a virtually unlimited amount of data in both S3 and Glacier. A single Glacier archive can contain 40TB of data.
+
+g.Lambda
+AWS Lambda is a serverless compute service that runs your code in response to events and automatically manages the underlying compute resources for you. You can use AWS Lambda to extend other AWS services with custom logic, or create your own back end services that operate at AWS scale, performance, and security.
+
+h.AMI
+An Amazon Machine Image (AMI) provides the information required to launch an instance. You must specify an AMI when you launch an instance. You can launch multiple instances from a single AMI when you need multiple instances with the same configuration.
+
+i.IAM
+AWS Identity and Access Management (IAM) enables you to manage access to AWS services and resources securely. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources. IAM is a feature of your AWS account offered at no additional charge.
+
+j.ELB
+Elastic Load Balancing (ELB) is a load-balancing service for Amazon Web Services (AWS) deployments. ELB automatically distributes incoming application traffic and scales resources to meet traffic demands. ELB helps an IT team adjust capacity according to incoming application and network traffic
+
+
+6.What steps would you take to create an EC2 and connect to it via your shell?
+1)Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/.
+2)Choose Launch Instance.
+3)In Step 1: Choose an Amazon Machine Image (AMI), find an Amazon Linux 2 AMI at the top of the list and choose Select.
+4)In Step 2: Choose an Instance Type, choose Next: Configure Instance Details.
+5)In Step 3: Configure Instance Details, provide the following information:
+6)Choose Next: Add Storage.
+7)Choose Next: Add Tags.
+8)Name your instance and choose Next: Configure Security Group.
+9)In Step 6: Configure Security Group, set Assign a security group to Select an existing security group. Choose the default security group to make sure that it can access your EFS file system.
+10)Choose Review and Launch.
+11)Choose Launch.
+12)Select the check box for the key pair that you created, and then choose Launch Instances.
+
+7.What configuration options are available for an EC2?
+AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources. 
+Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations
+
+8.What are Security Groups? When defining a rule for a security group, what 3 things do you need to specify?
+security group acts as a virtual firewall for your EC2 instances to control incoming and outgoing traffic. 
+Inbound rules control the incoming traffic to your instance, and outbound rules control the outgoing traffic from your instance. 
+When you launch an instance, you can specify one or more security groups
+
+1)Protocol. Network protocols the rule will allow, such as TCP and User Datagram Protocol.
+2)Port range. A specific port or a port range to allow traffic on.
+3)Source. A specific IP, IP range or other security groups that will be allowed access
+
+9.What’s the difference between scalability, elasticity, and resiliency? What is autoscaling?
+Scalability is used to meet the static increase in the workload. 
+Elasticity is used to meet dynamic changes, where the resources need can increase or decrease. 
+Scalability is always used to address the increase in workload in an organization
+Resiliency is the ability of a server, network, storage system, or an entire data center, to recover quickly and continue operating even when there has been an equipment failure, power outage or other disruption. ... 
+When one server in the cluster fails, another node takes over with its redundant workloads.
+AWS Auto Scaling monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost. 
+Using AWS Auto Scaling, it's easy to setup application scaling for multiple resources across multiple services in minutes

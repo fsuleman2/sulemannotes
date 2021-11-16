@@ -1,0 +1,174 @@
+hashmap
+collisions
+concurrent hashmap
+exception handling
+b to c we services
+b to b web appl
+difference b.w web application(me and amazon) and web services(amazon and payment/reebok)
+
+GOF(Desgin pattern)
+1.creational pattern how create object in any project
+2.structural pattern stuctire of object ()11
+3.
+
+observables and promises to get data from backend
+
+factory and singleton* as a fresher level
+
+one layer to other layer with DTO design pattern
+
+when to use and what to use
+diff b/w interface and abstract
+all the annotations are interfaces they give info to jvm at run time
+debug=true we can see internal process of spring process
+what are postive classes and negative classes
+
+what is exclusion?
+
+web app that is what we are doing (RestTemplate)
+
+hashcode working and bucket collion
+internal working of hashmap
+
+reactive programming (Web client) more than 15 microservices
+
+Uncondtional classes: it will show all the clasees who is repons for doing auto configuration
+10/7/2021
+
+What is component?
+to make our program light weight
+executer 
+event loop
+WebWorker to create multithreaded js
+joins checks contrainrs
+procedure functions indexes, nested query,having groupby between in, trigger and sequence
+auto gen id benhind it uses trigger or sequence
+select query
+why to use when to use how to use
+============================================
+
+A Map is an Associative array data structure that accepts input in the form of key value pair.
+
+Map is an interface we cannot create object of it
+so we have to search for the class that implements Map.
+1)  HashMap //speed singlle thread
+2) HashTable //synch
+3) TreeHashMap //sorted
+4) LinkedHashMap //insertion order
+
+-> Map has KeySet() that will get all keys
+Set<String> keys = map.keySet();
+for(String i : Keys){ //iterating the set
+	syso(map.get(i)); //getting all the values by passing key.
+
+*Map.Entry
+-> Entry Interface inside map interface
+Set<Map.Entry<String,String>> values = map.entrySet(); //give key value pair
+for(Map.Entry<String,String> e : values){
+	syso(e.getKey() + " : " + e.getValue());
+}
+->If you want speed and can manage with single thread then go for hashmap
+-> if speed is not criteria and want synchronization(thread safe) then go for hashtable
+
+-> in hashmap and hashtable insertion order is not maintained so just in case if you want proper insertion order then go for LinkedHashMap.
+
+-> If you want all the elements in map to be in sorted order then go for TreeHashMap.
+
+
+Hashmap is known as hashmap because it is based on one technique called hashing.
+
+Hashing: It is a process of converting String of characters(Text) in to a short fixed-length value that represents original string. 
+Why we are doing this?
+Becoz A Shorter value helps in faster indexing and faster searches(lookups).
+
+A SQL index is used to retrieve data from a database very fast. Indexing a table or view is, without a doubt, one of the best ways to improve the performance of queries and applications. A SQL index is a quick lookup table for finding records users need to search frequently.
+
+In java Every Object has a method public int hashcode() that will return a hash value for a given object.
+
+-> if two objects are equal then it suppose to be both has same hashcode.
+-> Hashcode is used in storing values into the hashmap
+
+-> hashmap comprises of table of length 16 initially by default
+-> each index of table is called an bucket
+each bucket consist of key, value and node(linked list)
+put("King",100);
+put(K k, V v)
+hash(k) -> 2306996 we cannot have array of such big number so
+we do modulo operation
+index = hash(k)%(n-1) here n= hashmap default index 16
+index = 2306996%16
+index = 4 so this key value will be stored at index 4 as a node
+each index is consider as a node(linkedlist) having a refer to next. 
+ex: KING|2306996|NULL
+right now ptr is not pointing to anywhere
+suppose we got one more entry on index 4 we get collisssion so in that case we add that new element after the existing one and make the null to point to that new entry.
+
+ex: KING|2306996|->BLAKE|6677889|NULL
+
+Note: 
+1) Collisions occurs only when there is same hashcode generated and element want to store at the same index, those entries will be stored as a linkedlist approach.
+
+2) As you know hashmap is also accept one null key value so index of that would be 0 always,as hash of null is zero 0.
+
+
+map.get(key)
+
+here the process is same, like we generate hash code and get index.
+so the end we get one hashcode and index value
+ex: hashcode=64205538 and index = 2
+so for fetching the value we see wheather there is a match of Key and hashcode on the particular index, if yes we get the value. else we see is there any reference it is pointing if yes we look for that if there is match we print it else nothing.
+
+
+
+In java 8, when we have to many unequal keys which gives same hashcode(index)- when the number of items in a hash bucket grows beyond certain threshold(TREEIFY_THRESHOLD=8), content of that bucket switches from using a linked list of Entry objects to a balanced tree. This theoretically improves the worst-case performance from O(n) to O(log n).
+-> performance increases.
+In Balanced Search, where left nodes have lesser weight(HashCode or Comparable result) for the Keys involded
+
+9 17 23 50 76 54 (In order)
+
+hashcode collisions: when two unequal objects creating same hashcode.
+hashcode collision are managed in hashmap by using the linked list or the balanced tree in java 8
+
+
+==============================================
+ArrayList internally uses Dynamic arrays
+LinkedList internally uses Doubly linked list
+
+===========================================
+Joins used when we want to get result where with the help of one table we couldn't get the result so in that case we used joins.
+1st condition : there should be one common column/attribute b/w 2 tables to do join operation.
+
+Joins in SQL are commands which are used to combine rows from two or more tables. based on a relatedcolumn between those fields. They are predominantly used when a user is trying to extract data from tables which have one-to-many, many-to-one and many-to-many relationship between them.
+
+Types of joins in SQL.
+1)Inner join 
+2)left join 
+3)right join
+4)full join
+
+1)Inner join: This type of join returns those records which have matching values in both table. So, if you perform an INNER join operation b/w employee table and the projects table. all the tuples which have matching values in both the tables will be given as output
+
+Syntax:
+SELECT Table1.column1,Table1.column2,Table2.column1...
+from Table1
+INNER JOIN Table2
+ON Table1.matchingcolumnName = Table2.MatchingColumnName;
+
+Select Employee.empid,Employee.empname,Project.pid,Project.pname
+from Employee
+INNER JOIN Project
+ON Employee.empid = Project.empid;
+
+2)Left JOIN/Left outer join
+The Left join or left outer join returns all the records from the left table and also those records which satisfy a condtion from the right table. Also for the records having no matching values in the right table. the output or the result set will contain the null values.
+
+Syntax:
+SELECT Table1.column1,Table1.column2,Table2.column1...
+from Table1
+LEFT JOIN Table2
+ON Table1.matchingcolumnName = Table2.MatchingColumnName;
+
+3) Right join 
+
+4)Full JOIN
+Full join or the full outer join retuns all those records which either have a matching in the left table or the right table.

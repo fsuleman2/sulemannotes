@@ -1,0 +1,176 @@
+Q1)Is it possible to change the port of the embedded Tomcat Server in Spring boot?
+Ans: Yes, by using the server.port = 9090 in the application.properties. (key value pair)
+
+Q2) Cam we Override or replace the embedded tomcat server in Spring boot?
+Ans: Yes, we can replace the Embedded Tomcat server with any server by using the Starter dependency in the pom.xml file.
+
+we can use <exclusions><exclusion>the dependency you want to xexclude</exclusion></excluions>
+<dependency>add the new dependecy where</dependency>
+every dependency must contain two tags <groupId>org.springframework.boot</groupId>
+<artifactId>Spring-boot-starter-tomcat</artifactId>
+
+
+Q3) What is auto-configuration in spring boot? how does it help? why spring boot is called opinionated?
+Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run".
+
+We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need minimal Spring configuration.
+
+Opinionated is a software design pattern that decides or guides you into their way of doing things. Spring Boot is opinionated because it follows the opinionated default configuration that reduces developer efforts to configure the application.
+
+Q4)what is @SpringBootapplication and @EnableAutoConfiguration annotaion?
+
+Ans: @EnableAutoConfiguration is used to enable auto-configuration but @SpringBootapplication does a lot more than that.
+
+It combines @Configuration and @ComponentScan annotations to enable java-based configurtion and component scanning in your project.
+
+@SpringBootApplication = @Configuration + @EnableautoConfiguration + @ComponentScan
+
+@configuration attach on the class and act as a source of bean defincations for the application context.
+
+@EnabelAutoConfiguration: Tells Spring boot to start adding beans based on class path settings and on various class path settings. for example if the spring-webmvc is the class path, this annotaion flags the application as a web application and activates the key behaviours such  as setting up a DispatcherServlet.
+
+@ComponentScan(basepackge={"mypack"},{""}) : Tells the Spring where to look for the components, confifurations and Services in the application and also letting it find the controllers.
+
+
+the main() method uses Spring Boot's SpringApplication.run() method to run the application.
+
+commandline interface is an Functional Interface and contain run() that allows us to run anything code on project startup 
+
+Q5) How to disable a specific auto-configuration class?
+Ans: we can do it by using exclude attribute of @EnableAutoConfiguration annotation to exclude specific class.
+
+for exmple:
+@EnableAutoConfiguration(exclude={path of className})
+
+
+6Q)Difference between @Restcontroller and @controller in Spring boot?
+@Controller : It maps the pojo object to view or template and makes it human redable.
+@RestController simply returns the object and object data is directly written in HTTP Response as JSON or XML.
+
+@RestController = @Controller + @Responsebody
+
+7Q)Describe the flow of HTTPS Request through the spring boot applcation?
+
+8Q)Difference b/w @RequestMapping and @GetMapping?
+@RequestMapping can be used with GET,POST,PUT, and many other request methods using method attribute on the annotation.
+
+Whereas @GetMapping is only an extension of @RequestMapping with GET method which helps you to improve clarity on request.
+
+@RequestMapping(value = "/user/{userid}", method = RequestMethod.GET)
+
+@GetMapping(value="/user/user{userId}")
+
+
+9Q) What is the difference between an embedded container and a WAR?
+Ans: The main difference between an embedded container and a WAR file is that you can run Spring Boot App as a JAR from the command prompt without setting up a web server.
+
+But to run a WAR File, you need to first set up a web server like Tomcat which has Servlet container and then you need to deploy WAR there.
+
+
+When to use WAR: Whenever you want to run you app on server of your choice u want generate WAR File.
+
+When to use JAR: Whenever you want to run your app on an embedded server such as tomcat in spring boot u can generate war so auto it will run on tomcat.
+
+Q10) What is the use of Profiles in spring boot?
+Ans: Profiles are a core feature of the framework — allowing us to map our beans to different profiles — for example, dev, test, and prod.
+
+We can then activate different profiles in different environments to bootstrap only the beans we need.
+
+ Use @Profile on a Bean
+
+We use the @Profile annotation — we are mapping the bean to that particular profile; the annotation simply takes the names of one (or multiple) profiles.
+
+Consider a basic scenario: We have a bean that should only be active during development but not deployed in production.
+
+We annotate that bean with a dev profile, and it will only be present in the container during development. In production, the dev simply won't be active:
+@Component
+@Profile("dev")
+public class DevDatasourceConfig
+
+As a quick sidenote, profile names can also be prefixed with a NOT operator, e.g., !dev, to exclude them from a profile.
+
+The next step is to activate and set the profiles so that the respective beans are registered in the container. it can be done in 3 ways i)xml ii)annotation based and iii)java configuration base.
+
+Example: Annotation base
+
+@Autowired
+private ConfigurableEnvironment env;
+...
+env.setActiveProfiles("someProfile");
+
+
+11Q)What is Spring Actuator? what are its Advantage?
+Provides special feature to monitor and manage your application when you push it to production.
+
+example: 
+it could be helpfull in checking health of your application.
+->info on how many are registered
+> info on mapping and end points
+-> shutdown your application etc
+with the help of actual you will be provided with end points by using end points you can monitor and manage your application
+-> it can be enable by adding actuator dependency.
+
+if end points are publicy available then anybody can shutdown you application.. so to protect that we can take help of spring security and secure actuator endpoints by making it secure so that only a designated person can manage those endpoints rather than the public user.
+
+Q12) how to get all the list of all the beans in your spring boot application?
+ans: 
+localhost:8080
+/actuator/beans
+/actuator/health.
+/actuator/shutdown
+----------------------------------------------
+@ \value used for fetch the  value from properties file like @Value("${property.name}"),  @resource= @Autowired+@Qualifier
+---------------------------------------------------------
+@Controller -presentation layer
+@Service - Service Layer
+@Repository - DAO Layer
+--------------------------------------------------
+Let consider a Scenario where you want to create two objects of same class. and that you want to autowired in another class..
+in other class IOC will get confused which object i should autowired in that case what we can use @Qualifer("beanId") just after @Autowired and in configuration file give bean id like this @Bean("beanId") and @Lazy before that.
+so whatever object we want we can autowired with the bean id and qualifer and by using @Lazy only the calling object will get invoke.
+
+-------------------------------------
+@ResponseBody : if using with @GetMapping then it will convert java object to JSON and Return on Web page.
+->It basically serialize the data and send it to json format
+
+Jab Frontend se kuch data ara jaise k form data ara
+@RequestMapping(value="/home", method=RequestMethod.GET)
+@ResponseBody
+public Student home(@RequestBody Student s1){}
+Jo bhi data frontend se ara hoga in the form of JSON that will be auto converted into java or deserilize and stored it into s1 object.
+
+@PathVariable : if user is sending any URI Data thru URL that u want to catch and bind it to java variable or object u can do it so by using @PathVariable
+
+@RequestParam to extract query parameters, form parameters, and even files from the request.
+
+@RequestParam and @PathVariable can both be used to extract values from the request URI, but they are a bit different.
+
+@RequestParams extract values from the query string, @PathVariables extract values from the URI path:
+if you are sending data from your input form data such as email 
+
+add dependency inside pom.xml for validation
+add @valid inside method
+in MODEL
+add this annotation accroding you need
+@NotNull
+@Min
+@Max(250)
+**********************************SPRING PROPERTIES*****************
+server.port=8121
+spring.datasource.url=jdbc:postgresql://localhost:5432/postgres?currentSchema=exam_schema
+spring.datasource.username=postgres
+spring.datasource.password=root12345
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# ===============================
+# = JPA / HIBERNATE
+# ===============================
+# Show or not log for each sql query
+spring.jpa.show-sql=true
+# Hibernate ddl auto (create, create-drop, update): with "create-drop" the database
+# schema will be automatically created afresh for every start of application
+spring.jpa.hibernate.ddl-auto=create
+
+# Allows Hibernate to generate SQL optimized for a particular DBMS
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+***********************************SPRING PROPERTIES*****************

@@ -1,0 +1,43 @@
+
+Problem #1- Missing InvoicesYou are working on a project where I need to manage multiple client’s invoices. After certain period of time,clients have requested to provide list of missing invoice number from each one of them group by year. You can assume inputdata are in the following format:
+input:
+ClientName Year Start EndInfosys 2017 101 102TCS 2016 105 108
+Infosys 2017 105 108TCS 2016 112 116Wipro 2017 103 104Infosys 2016 115 120
+Wipro 2017 108 112TCS 2017 101 104
+
+output:ClientName 
+Year Missing Invoices
+Infosys 2017 103,104,109,110,111,112,113,114TCS 2016 109,110,111Wipro 2017 105,106,107
+
+
+
+Q1)Core java questions
+Q2)simple front end questions
+Q3)@RequestMapping,@PostMapping @GetMapping
+Spring Boot annotations all
+String vs StringBuffer vs StringBuilder
+Para Stream
+priority Queue
+Complexities in insertion and deletion from Queue
+OOPS Concept: 
+DI
+IOC
+Working of Full Stack App(MVC)
+How Cloud Works
+Why we use Cloud
+When we deploy to cloud then it goes to which layer first
+Collections Framework
+garbage collector
+Lambda Expressions
+SQL-
+JOINS
+All Contraints
+Trees and how it works where we use
+Spring vs SpringBoot
+final project explanation and wht is your role in that.
+@Controller
+Inheritance vs Association
+IS-A Relationhsip and HAS-A relationship
+diff b/w == and .equals() 
+
+ 

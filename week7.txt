@@ -1,0 +1,179 @@
+Week-7
+Web service is a technology to communicate one programming language with another. For example, java programming language can interact with PHP and .Net by using web services. In other words, web service provides a way to achieve interoperability.
+
+1. SOAP
+-> SOAP stands for Simple Object Access Protocol, It is a XML-based protocol for accessing web services.
+
+-> SOAP is XML based protocol. It is platform independent and language independent. By using SOAP, you will be able to interact with other programming language applications.
+
+Advantages:
+-> SOAP defines its own security known as WS Security.
+
+-> Language and Platform independent: SOAP web services can be written in any programming language and executed in any platform.
+
+DisAdvantages:
+*Slow: SOAP uses XML format that must be parsed to be read. It defines many standards that must be followed while developing the SOAP applications. So it is slow and consumes more bandwidth and resource.
+
+2. RESTful web Services
+->REST stands for REpresentational State Transfer.
+->REST is an architectural style not a protocol.
+
+Advantages: 
+*Fast: RESTful Web Services are fast because there is no strict specification like SOAP. It consumes less bandwidth and resource.
+
+*Language and Platform independent: RESTful web services can be written in any programming language and executed in any platform.
+
+*Can use SOAP: RESTful web services can use SOAP web services as the implementation.
+
+*Permits different data format: RESTful web service permits different data format such as Plain Text, HTML, XML and JSON.
+
+
+SOAP VS REST
+1. SOAP is protocol 1.REST is an Architectural Style
+2.SOAP can't use REST because it is a protocol 
+2. REST can use SOAP web services because it is a concept and can use any protocol like HTTP, SOAP.
+
+https://www.javatpoint.com/soap-vs-rest-web-services
+--------------------------------------------------------------------
+
+"Microservices are small, autonomous services that work together." -- Sam Newman
+
+In a microservice architecture, we divide an application into services. Each service runs a unique process and manages its database. A service can generate alerts, log data, support user interfaces (UIs), handle user identification or authentication, and perform various other tasks.
+
+
+The microservice paradigm provides development teams with a more decentralized approach for building software. Most companies in the world – like Amazon, Netflix, Uber, Etsy, etc., have adopted the microservices architecture for developing their applications. Over time, these enterprises dismantled their monolithic applications and refactored them into microservice-based architectures. This has given them scaling advantages, greater business agility, and increased profits.
+
+
+Advantages:
+-> Fault isolation - If one service crashes, it’s quite possible the rest of the application can continue to operate until that service recovers.
+-> Microservices are language and platform independent.
+-> Dynamic scaling - we can dynamically scale up/down the service instances whenever required.
+-> Developers have the freedom to develop and deploy services independently.
+
+-> Use of containers allowing for a quick deployment and development of the application.
+
+
+Disadvantages of Microservices
+
+->Microservice architecture is complex.
+->Harder to test and monitor because of the complexity of the architecture.
+->Large numbers of microservices are harder to manage and secure.
+
+https://app.revature.com/curriculum/viewactivity/14303/Week%207
+--------------------------------------------------
+Netflix Eureka Server
+
+Eureka Server is an application that acts as a service registry. Every Microservice will register itself into the Eureka server and the Eureka server knows all the client applications running on each port and IP address.
+
+Harshipcorp consul server
+-------------------------------------------------
+Api Gateway
+An API gateway sits between a client and a collection of backend services. The API gateway takes all API requests from a client, determines which services are needed, and combines them into a synchronous experience for the user.
+
+-> For most microservices-based applications, an API gateway acts as a single entry point into a system. The API gateway is responsible for request routing.
+
+-> It handles some requests by simply routing them to the appropriate backend service, and handles others by invoking multiple backend services and aggregating the results. If there are failures in the backend services, the API gateway can mask them by returning cached or default data.
+
+There are two types of API Gateway Implementation
+1. Netflix Zul and 
+2. Spring Cloud Gateway
+
+---------------------------------------------
+Load Balancing:
+->load balancing mechanism to ensure that incoming requests are spread across all of the available instances, rather than overloading some instances at the same time, while other instances are under-utilized.
+
+->A load balancer acts as the traffic cop sitting in front of our servers, and routs client requests across all servers capable of fulfilling those requests. It does so in a manner that maximizes speed and capacity utilization, and ensures that no one server is overworked, which could degrade performance. If a single server goes down, the load balancer redirects traffic to the remaining online servers. When a new server is added to the server group, the load balancer automatically starts sending requests to it.
+
+example: Netflix Ribbon is a client-side load balancer that gives you a lot of control over the behavior of HTTP and TCP clients.
+
+
+Ribbon — Load Balancing
+When Zuul receives a request, it picks up one of the physical locations available and forwards requests to the actual service instance. Internally, Zuul uses Netflix Ribbon to lookup for all instances of the service from the service discovery (Eureka Server) and routes the external request to an appropriate service instance.
+
+
+
+------------------------------------------------------------
+A message queue is a software component used for passing data (messages) between services. It exposes an interface for adding, reading, and removing messages.
+
+Apache Kafka
+We use Apache Kafka to enable communication between producers and consumers using message-based topics.
+
+Apache Kafka is a distributed streaming platform, used to
+
+Publish and subscribe to streams of records, similar to a message queue or enterprise messaging system.
+Store streams of records in a fault-tolerant durable way.
+Process streams of records as they occur.
+-----------------------------------------------------------------------------------------
+
+Configuration Servers
+In the cloud, configuration can’t simply be embedded inside the application. The configuration has to be flexible enough to cope with multiple applications, environments, and service instances, as well as deal with dynamic changes without downtime.
+
+Spring Cloud Config is designed to ease these burdens and offers integration with version control systems like Git to help you keep our configuration safe.
+
+Spring Cloud Config provides server-side and client-side support for externalized configuration in a distributed system. With Spring Cloud Config Server, we have a central place to manage external properties for applications across all environments. Services can consume their application properties from the Config Server rather than loading them locally from the file system or classpath. Configuration is not stored in the Config Server itself but pulled from a Git repository. This allows us to manage our application configuration with all the benefits of version control.
+
+@EnableConfigServer
+
+=============================================================================
+Q1. Explain Microservices Architecture?
+Microservice is a way in which you build your application by breaking down it into smaller pieces and deplyoing them separetly and have them talk to each other so that they can share info with each other.
+
+Q2. Name three commonly used tools for microservices
+i)Docker ii)Hystrix and iii)wiremock
+
+Q3) What is monolithic Architecture?
+Your application is deployed as a single unit, here we don't have smaller services talks to each other.
+->It is fast but mostly tightlycoupled
+
+Q3)Advantages of MSA?
+i) If one service goes down other service remains running(Fault Isolation) ex:amazon
+ii) If you are building an application using MS you have freedom to choose any technology of you choice. for example if one person is using angular in one service the other can use react, if one is using mysql the other can use mongodb.
+
+iii)MSA makes your application more loosely coupled.
+
+iv)Deployment Time reduce, one person is done with the service, he/she need not have to wait for other person for deployment.
+
+
+Q4) What is Spring Cloud?
+Ans: It provides Bunch of libraries and solutions which allows you to tackle some of the cross cutting concerns(Cross-cutting concerns are parts of a program that rely on or must affect many other parts of the application).
+
+Example for MSA: configuration management, service discovery, circuit breakers.
+
+example FOR AOP:logging, security and data transfer are the concerns needed in almost every module of an application, thus they are the cross-cutting concerns.
+
+
+5Q)What are the challenges faced while using MSA?
+i) Deployment is more complex
+ii) Managing is more complex
+iii)Managing and product relase is complex.
+
+6Q)In which cases MSA best suited for?
+-> It is best when you are building a large application with a large codebase
+-> It is best when you a large to work on.
+-> When you need to scale up and scale down quickly.
+
+7Q) Big companies using MSA?
+Google,AMAZON, NETFLIX, Twitter and FACEBOOK.
+Bank industry is slow, medical industry is slow.
+
+8Q) What is RestFul?
+Representational State Transfer(REST,RESTFUL) Web Services is an architectural style that helps computer system to communicate over the internet.
+
+9Q)What are three types of Test for MS?
+unit,integration and acceptance test.
+
+10Q) What is the meaning if OAuth?
+Ans: OAuth means open authorization protocol. This protocol allows you to access the client application on HTTP for third-party providers GitHub,Facebook etc. It bascially helps you to share the resources stored on one site with another site without the need for their credentials.
+
+If you are building a microservice application you have lots of services to comminicate so there should be a proper protocol that one service trust another, so that they don't have to ask credentials everytime. so in that case we case OAuth.
+
+11Q)what is End to End Microservices Testing?
+Ans: End-to-End Testing validates every process in the workflow is functioning properly.
+It also ensures that the system works together as a whole and satisfies all the requirements correctly.
+
+12Q)Why are Containers used in Microservices?
+Containers are easiest and effective method to manage the microservice based application. It also helps you to develop and deploy individually. Docker also allows you to encapsulate your microservice in a container image along with its dependencies. Microservice can use these elements without additional efforts.
+
+13Q) How independent micro-services communicate with each other?
+It depends upon your project needs. However, in most cases, developers use HTTP/REST with JSON or Binary protocol. However, they can use any communication protocol.
+

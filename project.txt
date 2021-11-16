@@ -1,0 +1,328 @@
+project
+-breif description
+Banking Management App is web based java application which allows users to open an account, Deposit amount, widthdraw amount, transfer amount and also provide facility to view previous statements.
+-challenges you faced
+Building an web application by following 3-tier archi is completely new for me so it took time to manage everything on separate separate layer
+
+-what's your role
+-what technologies you have used
+
+ let url = "http://localhost:8085/bankapp_v2/customeropenaccount";
+        fetch(url,{
+            method : 'POST', 
+	     body : JSON.stringify({
+                custUserName : document.getElementById('custusername').value,
+
+            }),
+            headers : {'Content-type' : 'application/json; charset=UTF-8',},
+        })
+
+let url = "http://localhost:8085/bankapp_v2/viewstatements";
+    fetch(url)
+        .then(response => response.json())
+        .then(res => {
+            let data = "<table class='table table-striped table-bordered table-responsive'> <thead class='thead-dark'><tr><th>Transaction Id</th><th>Customer User Name</th><th>Transaction Type</th><th>Opening Balance</th><th>Transaction Amount</th><th>Transaction Date</th><th>Closing Balance</th></thead><tbody>"
+            res.forEach(e => {
+                data = data + "<td class='btn-primary'>" + e.tid + "</td>";
+                data = data + "<td class='btn-success'>" + e.custUserName + "</td>";
+                data = data + "<td class='btn-info'>" + e.ttype + "</td>";
+                data = data + "<td class='btn-danger'>" + e.openingbalance + "</td>";
+                data = data + "<td class='btn-primary'>" + e.tamount + "</td>";
+                data = data + "<td class='btn-info'>" + e.tdate + "</td>";
+                data = data + "<td class='btn-success'>" + e.closingbalance + "</td></tr>";
+            });
+            data = data + "</tbody></table>"
+            document.getElementById("results").innerHTML = data;
+        })
+
+Gson gson = new Gson();
+bank = bankCrudService.openCustomerAccount(bank);
+response.setContentType("application/json;charset=UTF-8");
+PrintWriter out=response.getWriter();
+out.print(gson.toJson(bank)); //POJO TO JSON
+response.sendRedirect("login.html");
+=======================================================================
+Project-2
+Imtehan is an Examination Portal which allows Grads to take Skill based Test at free of cost. User can take any number of skill based test which are aligned in categories.
+
+constructor(private http: HttpClient) {}
+
+
+ public generateToken(loginData: any) {
+    return this.http.post(`${baseUrl}/generate-token`, loginData);
+  }
+
+<input [(ngModel)]="loginData.username" matInput placeholder="Username" required  name="username"ngModel #email="ngModel">
+
+
+ this.login.generateToken(this.loginData).subscribe(
+      (data: any) => {
+        console.log('success');
+        console.log(data);
+}(error:any)=>{}
+
+    @PostMapping("/")
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
+        Category category1 = this.categoryService.addCategory(category);
+        return ResponseEntity.ok(category1);
+    }
+ @GetMapping("/{username}")
+    public User getUser(@PathVariable("username") String username) {
+        return this.userService.getUser(username);
+    }
+
+    //delete the user by id
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable("userId") Long userId) {
+        this.userService.deleteUser(userId);
+    }
+=============================================================================
+AJAX: We can use the AJAX to modify any content of the page without refreshing it.
+We can use AJAX for making asynchronous calls or requests to the backend server and backend server will consume this request and will generate an appropriate response for the same.
+
+AJAX works like a callback style of function, where it sends the data to the server via the url/uri(endpoint) with http/htpps protocol methods/verbs.
+
+XMLHttpRequest(XHR) Object -> we Can use this object to make http calls to the server call from client->answered by server(process the request)->response back to client->client process the response
+
+ <h3>XHR methods</h3>
+            <ol>
+                <li>XMLHttpRequest() -> constructor used to create a XHR object</li>
+                <li>send() and send(string) -> 1st one use for GET,DELETE requests and 2nd one used for POST PUT</li>
+                <li>abort() - terminate the request</li>
+                <li>open(http method,url/endpoint, async(true/false), username,password)</li>
+                <li>setRequestHeader() any header meta information about the client which you want to send to server
+                </li>
+                <li>getResponseHeader() to read the header or meta information sent by the server</li>
+                <li>readyState Holds the status of the XMLHttpRequest.
+                    0: request not initialized
+                    1: server connection established
+                    2: request received
+                    3: processing request
+                    4: request finished and response is ready</li>
+            </ol>
+
+
+ b1.onclick = () => {
+        let url = "https://api.github.com/users";
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+
+        xhr.onload = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let res = JSON.parse(this.responseText);
+                console.log(res);
+                let data = "<table class='table table-striped table-bordered'> <thead class='thead-dark'> <tr><th>ID</th><th>Login Name</th><th>Avatar</th></thead><tbody>"
+                res.forEach(e => {
+                    data = data + "<tr><td>" + e.id + "</td>";
+                    data = data + "<td>" + e.login + "</td>";
+                    data = data + "<td><img height='150px' width='150px' class='rounded-circle' src='" + e.avatar_url + "'/>"
+                });
+                data = data + "</tbody></table>"
+                document.getElementById("results").innerHTML = data;
+            }
+        }
+        xhr.send();
+    }
+
+Media Queries:
+@media(min-width:1200px){for larger devices}
+@media(min-width:992px)and(max-width:1199px){for medium devices}
+@media(min-width:778px)and(max-width:991px){for small devices}
+
+<marquee width="60%" direction="up" height="100px">
+This is a sample scrolling text that has scrolls in the upper direction.
+</marquee>
+
+1)position:relative 
+An element with position: relative; is positioned relative to its normal position.
+2) position:absolute 
+An element with position: absolute; is positioned relative to the nearest positioned ancestor (instead of positioned relative to the viewport, like fixed).
+
+The .container class provides a responsive fixed width container
+The .container-fluid class provides a full width container, spanning the entire width of the viewport
+
+<div class="row">
+  <div class="col-sm-4">.col-sm-4</div>
+  <div class="col-sm-8">.col-sm-8</div>
+</div>
+
+
+A jumbotron indicates a big grey box for calling extra attention to some special content or information.
+
+However; if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.
+
+
+The Modal component is a dialog box/popup window that is displayed on top of the current page:
+--------------------------------bOOstrpend----------------------------------
+JavaScript:
+let arr=["suleman",""];
+arr[1]=["Arjun"];
+arr.push("this will add element add the end")
+arr.unshift("this will add element at the end")
+arr.pop("pop element from the end")
+arr.shift("pop element from front")
+arr.slice(startindex,endindex)
+arr.splice(2,3) //return copy of the array into a new array
+arr.sort()
+arr.reverse()
+ document.getElementById("message1").innerText = "<h1>Hello from innerText I wont parse html tags... and hello " + fname + " </h1>";
+
+clousre means function returns another funtion
+inner function can have access to outside funtion
+let x = ()=>return "hello"; //annonymous +lambda
+arr.map((item)=>{return item*5}) //used to apply common operation to all eleements
+arr.filter((item)=>{return item>10;})
+
+---------------------JS end--------------------------------------
+
+•1xx informational response – the request was received, continuing process
+•2xx successful – the request was successfully received, understood, and accepted
+•3xx redirection – further action needs to be taken in order to complete the request
+•4xx client error – the request contains bad syntax or cannot be fulfilled
+•5xx server error – the server failed to fulfil an apparently valid request
+
+200 ok/success
+201 The request has been fulfilled 
+301 permanent redirect
+302 temporary redirect
+401 unauthorized error
+402 forbidden
+404 not found
+405 method not allowed
+501 not implmented
+502 Bad Gateway
+503 Service unavailable
+504 Gateway timeout
+
+Browser storages:
+local storage
+session storage
+cookiees
+indexDB
+WebSQL
+Servlet is a small java program that resides inside tomcat container and capable of handling of all the http request.
+The web container maintains the life cycle of a servlet instance. Let's see the life cycle of the servlet:
+
+1)Servlet class is loaded.
+2)Servlet instance is created.
+3)init method is invoked.
+4)service method is invoked.
+5)destroy method is invoked.
+
+protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+response.setContentType("text/html");
+PrintWriter out=response.getWriter();
+out.print("<h1>Hello From service() method of MyServlet</h1>");
+}
+out.print("<h2>Hello...... "+request.getParameter("fname")+"</h2>");
+
+ServletConfig config = getServletConfig();
+Config.getInitParameter(“query1”) //here query1 is a key and will get the value
+
+HttpSession session=request.getSession(); //create a new session 
+session.setAttribute("user", user);		
+response.sendRedirect("two.html");
+
+Sessions scope
+1.ServletRequest alive untill url not changes
+2.Servlet Config alive untill servlet is destroyed
+3.HttpSession Alive  b/w user login to logout.
+Payload : browser storage we can say. That data can be send thru URL to the Server.
+==================================================================
+Project-3
+Revature Railways:
+The system should allow the users to register, login, reserve the train seats/sleeper for routes (up/down otherwise source/destination) based on the ticket availability and in that the morning train will be a passenger train, the afternoon train will be express starts from source to destination - no stopping in the middle and the night train will be fast train with minimum stops. Admin can add train details, add route, schedule the train, generate the report of booking and cancellation.
+
+Revature Railways is an Java Full Stack Railway Reservation System which allows passengers around the nation to search, book and cancel the train tickets. This Application is highly interactive and comes with smooth user experience/interface, passengers above 15 years of age can easily book tickets from the comfort of their homes.
+
+2- routes(srs->des)
+
+TRAIN:
+3 trains allowed in routes
+t1-morning(passenger train all stops) 1 s<->d
+t2-afternoon(express train non stops)1 s<->d
+t3-night(fast train min stops 4 or 6)1 s<->
+
+10coaches
+	
+	chair type(66+4(disabld)chairs): 4 coaches(2AC + 2Non-AC)
+	Sleeping type(48+2(diabled)) : 6 coaches(3AC + 3NON-AC)
+
+t1->coach type((70x10=700)):
+		-> 1coach AC + 9 NON-AC all are chair type
+		-> Morning trains will stops in 10-15 stations(S<->D)
+t2-> Coach Type: 
+		-> 1coach AC + 9 NON-AC all are chair type
+		-> NO STOPS
+t3-> Coach Type: -> SLEEPER TYPE: 2AC+ 7 NON AC
+			chair type one NON-AC
+		-> 4-6 stops 
+
+
+Scheduling: 
+train no.
+start timing(9am)
+end timing(9pm)
+travelling time(12hours)
+no. of stops(10)
+stops timing(10min)
+
+
+Ticket info:
+tiket id:
+ticket type:
+	->adult(18-60 age) fixed 100$
+	-> children(below 5age) NIL
+	->senior citizen(60-80) 10%dis (>80) 20%dis
+	->irrespective of age if physically challenged(5-60) 30%dis
+seating type: 
+	1. CHAIR TYPE AC
+	2. CHAIR TYPE NON-AC
+	3. SLEEPING TYPE AC
+	4. SLEEPING TYPE NON-AC
+price id:->relationship
+Pricing will be different for AC/Non-AC
+Pricing will be different from Chair Type/Sleeping Type
+
+ADMIN:
+Responsibilities
+-> As a admin, I can add a route or remove a route with train name and train number
+-> As a admin, I can add stopping point or remove stopping point in each route, each stopping point should have a name
+
+-> As a admin, I can  fix the price - general price - of age 6-60 for that route.
+
+morning 15 stations
+6th station 15th
+6+7+15/no 11
+
+CUSTOMER:
+Responsibilities:
+-> As a customer, I can submit a registration form which include
+name, email, phone, address with login user name &
+password.
+
+-> Each login user to this application should have one identity proof like driving license/pan/aadhar
+-> Each login user can add their family or friends with name, age, gender, if physically challenged or not - maintain a list.
+
+-> Each login user can reserve for 5-10 seats not more than that
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+algorithms- linear,binary,bubble sort, selection sort, quick sort and merge sort
+diff b/w list & arrays
+
+Can you please tell me what kind of technologies Digital specialist engineer works.

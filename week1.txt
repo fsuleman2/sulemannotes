@@ -1,0 +1,149 @@
+Q) Why Java is not 100% objected oriented?
+Ans: 
+1)Because of Primitive data types namely
+byte,short,int,long,float,double,char,and boolean
+
+2)When we declares a class as static then it can be used without the use of an object in Java. If we are using static function or static variable then we can’t call that function or variable by using dot(.) or class object defying object oriented feature.
+To make them OO we have wrapper classes whoch actually Wrap" the primitive data type into an object of that class.
+
+https://www.geeksforgeeks.org/java-not-purely-object-oriented-language/
+
+Q) Why pointers are not used in java?
+Because:
+1) They are unsafe
+2)Increase the complexity of the porgram and since Java is known for its simplicity of code, adding the concept of pointers will be contradicting.
+3)Since JVM is responsible for the implicit memory allocation, thus in order to avoid direct access to memory by the user, pointers are discouraged in java.
+
+Q)What is JIT compiler?
+JDK->JVM->JRE
+Jvm responsible for converting your java code to byte code by
+generating abc.class file. this bytecode is machine independent.
+for converting byte code into machine understandable code we need jre. inside jre, interpreter and jit compiler lives.
+byte code is interpreted line by line by interpreter which takes longer time so to improve performance JIT is introduced.
+
+Q)Why string is immutable in java?
+->Reason1: String pool requires to be immutable otherwise string references can be changed from anywhere.
+->Reason2: for security purposes also, because string is shared on different areas like file system,networking connections, db connections etc, having immutable string allows you to be secure and safe bcoz no one can change references of string once it gets created.
+
+Q)What is marker interface?
+A marker interface can be defined as the interface having no data member and member functions. In simple terms, an empty interface is called the marker interface.
+eg:Serializable, Cloneable
+public interface Cloneable{}
+
+Q)Can you override a private or static methods in java?
+Ans: No, You cannot override a private or static methods in java.
+
+-> You cannot override a private method in sub class because it's not accesible there, what you do is create another private method with the same name in the child class.
+
+-> For static methods, if you create a similar method with the same return type and same method args in child class then it will hide the superclass method, this is known as method hiding.
+
+Q)Does "finally" always execute in java?
+Not in the following cases:
+1. System.exit() function.
+2. when system crashes.
+
+Q)What methods Does the object class have?
+Java.lang.Object class, parent of all and has following methods:
+
+1)protected Object clone() throws CloneNotSupportException
+creates and returns a copy of this object.
+
+2)public boolean equals(Object obj)
+
+-> The main difference between the .equals() method and == operator is that one is a method and the other is the operator.
+
+->We can use == operators for reference comparison (address comparison) and .equals() method for content comparison. 
+
+->In simple words, == checks if both objects point to the same memory location whereas .equals() evaluates to the comparison of values in the objects.
+
+3)protected void finalize() throws Throwable
+	The finalize() method of Object class is a method that the Garbage Collector always calls just before the deletion/destroying the object which is eligible for Garbage Collection, so as to perform clean-up activity. Clean-up activity means closing the resources associated with that object like Database Connection, Network Connection or we can say resource de-allocation. Remember it is not a reserved keyword. Once the finalize method completes immediately Garbage Collector destroy that object.
+
+
+HashMap and HashSet use the hashcode value of an object to find out how the object would be stored in the collection, and subsequently hashcode is used to help locate the object in the collection. Hashing retrieval involves:
+
+1)First, find out the right bucket using hashCode().
+2)Secondly, search the bucket for the right element using equals()
+---------------------------------------------------
+Some of the Object class methods:
+public final class getClass(): returns the runtime class of an object.
+public int hashCode(): returns a hashcode value for the object.
+public String toString():Returns a string representation of the object.
+public final void notify(), notifyAll(),wait(),wait(long timeout), wait(long timeout, int nanos),
+--------------------------------------------
+Q)How can you make a class Immutable?
+1)declare the class as final so it cannot be extended
+2) make al fields private so that direct access is not allowed
+3)don't provide setter method for varibles.
+4)make all mutable fields as final, no value can be assigned
+5)intilize all the fields via a constructor performing deep copy
+6)perform object cloing return copy rahter than actual object reference.
+----------------------------------------------
+Q)What is singelton class in java how can we make it?
+Ans: Singelton class is a class whose only one instance can be created at any given time, in one JVM.
+1)make constrcutor private
+2)now u need only one object so we can that by
+private static Animal single_instance = null;
+public static Animal getInstance(){
+if(single_Instance = null){
+single_instance = new Animal();
+}
+return singleInstance}
+}
+
+-----------------------------------------------
+
+-Types of relationship btwn classes
+Why we do relationships?
+
+code resuability,
+Removing code redundancy
+cost cutting.
+
+Diadvantage:Tightly coupled.
+
+1.Inheritance(IS-A) :inheriting properties of parent class into child class.
+we can do it by using classA extends ClassB
+classB can access evtrhing except constrctr and private fields.
+
+class vehicle{}
+class car extends vehicle{}
+//car IS-A Vehicle
+but due to this approch our classes become tightly coupled, means if changes made in classA it will be reflected in all the child classes of ClassA.
+
+2.Association(HAS-A)
+i)Aggregation(Weak) it's a weak relationship where one object can exist without the other objecct.
+ex:car and music player
+ii)Composition(Strong) it's a strong relationship where one object cannot exist without the other objecct.
+ex:car and engine
+
+class Student
+{
+	String name;
+	int rollno;
+}
+Student HAS-A name, Student HAS-A rollno;
+
+Class Engine{
+}
+class Car{
+	Engine e = new Engine();
+}
+
+Note:If we have extends engine that all the properties will come in Car class and it also become tightly coupled.
+
+if we create object of Engine class in Car, we get choice what properties we can get required properties only. 
+having a HAS-A relationship we code changes can be easier.
+----------------------------------------------------------
+Collection Framework is most powerful sub-system in java that provides various interfaces such as LIST,SET,QUEUES and MAP
+that helps the developers to manage group objects.
+
+Q)Why Map Does not extend the Collection Interface?
+->First of all Map Interface in java follows a key/value pair structure where as the Collection interface is a collection of objects which are stored in a structured manner with a access mechanism.
+-> The main reason Map Does not extend Collection interface is all the collections follow two methods i.e add()  but map follows something different that is put().
+
+Q)Difference between fail-fast and fail-safe iterators?
+-> Fail-fast Iterators throws ConcurrentModificationException when one thread is iterating over collection object and other thread structually modifying the Collection either by adding, removing or modifying objects on underlying collection.
+They are called fail-fast because they try to immediately throw Exception when they encounter failure.
+
+-> Fail-safe iterator does not throw any exception if collection is modified structurally while one thread is Iterating over it because they work on clone of Collection instead of original collection and thats why they are called fail-safe iterator

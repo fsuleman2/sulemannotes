@@ -1,0 +1,103 @@
+anything u keep in <head></head> it will work before dom construction
+if you want anything that is loaded after dom construction script tag can be placed at bottom of body
+
+page rendering is slow if you keep script tags in head.
+DOMCONTENTLOADER
+
+-----------------------
+Browser storage APIS
+
+-cookies: small textual data that is hoook with the server
+limitations:
+-> Size limited 
+-> security concerns
+-> Same-origin policy
+-> every sub-seq will carry cookies
+
+in html5 
+-sessionStorage
+-localstorage
+
+-IndexDB
+-WebSQL
+
+framework: comes with read code
+here you have to follow some code structure
+-> in terms of performance Angular is not that much code
+ex:Angular
+library:it comes with utility methods u used them based on requirement
+ex: Reactjs
+->React is code in terms of performance
+
+Angular SSR read about this    
+async - attribute 
+how java can handle cuncurren request though it is single threaded.
+ans: event loops
+
+Javascript language
+	->Single-threaded process, but we can execute concurrent actions because of non-blocking with event loop.
+
+Browser API'S
+DOM, TIMER                                                      io do multiple actions
+but in concurrent it exe after tha particular methods completely executes
+to overcome that we have webworker api
+
+cost webW = new Worker("mention that js file path")
+after using webworker JS would not wait for that longrunfile to execute instead it displyas other pages.
+
+-> if you have some computations do to then js will wait unless that function executes. it is not an IO operation it won't wait and switch to other task.
+
+if u want to chnage the default behavuoiur of field u can go for value decorator
+
+tsc --target ES5 --experimentalDecorators
+
+to avoid cascading failure we use circuit breaker pattern
+
+to develop java microservices
+spring
+
+quarkus
+
+halidon
+
+micronaut
+
+microservices in nodejs platform
+Molecularjs
+
+hystrix -> resilience4j
+
+
+jasmine is a unit testing F.W
+
+karma is a test-runner
+
+E2E-Test-runner
+-protractor
+
+it -> @Test
+//ACT/ trigger events
+//Assert
+
+testbed is a utility class
+
+items:Array<any>=[
+{
+	name:'Item-1',
+}
+
+]
+
+{{item.price}}
+
+@input parent -> child
+@Output child -> parent event emitter
+intercomponent communication
+
+
+How to manage UI state for NG Components?
+-> Service Objects
+Why we need service objects?
+ans: to manage global state and Business | networkig logic for UI components
+
+rxjs for publishing data

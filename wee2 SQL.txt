@@ -1,0 +1,142 @@
+->PostgreSQL is an Object Relational Database Management System (ORDBMS) whereas MySQL is a community driven DBMS system.
+
+->PostgreSQL support modern applications feature like JSON, XML etc. while MySQL only supports JSON.
+
+->Comparing PostgreSQL vs MySQL performance, PostgreSQL performs well when executing complex queries whereas MySQL performs well in OLAP & OLTP systems.
+
+->PostgreSQL is complete ACID compliant while MySQL is only ACID compliant when used with InnoDB and NDB.
+->PostgreSQL supports Materialized Views whereas MySQL doesn’t supports Materialized Views.
+
+--CREATE TABLE employee_test
+--(
+--emp_id int,
+--emp_name varchar,
+--emp_Sal decimal
+--);
+--
+--INSERT INTO employee_test VALUES(1,'Anish',1000);
+--INSERT INTO employee_test VALUES(2,'Sushant',2000);
+--INSERT INTO employee_test VALUES(3,'Rakesh',1100);
+--INSERT INTO employee_test VALUES(4,'Manoj',1300);
+--INSERT INTO employee_test VALUES(5,'Amit',1400);
+
+select * from  employee_test;
+-- problem to find the 3rd highest salary
+
+--first approach(bad approach)
+select max(emp_sal) from employee_test where emp_sal < (select max(emp_sal) from employee_test where emp_sal < (select max(emp_sal) from employee_test));
+
+--Best approach
+select emp_sal from employee_test 
+order by emp_sal desc
+limit 1 offset 2;
+
+--limit=no. of rows you want
+--offset = what row you want 0,1,2,3?
+
+--Indexes are database objects which help in retrieving record quickly and efficiently.
+--creating an index 
+--create index index_name on TABLE_NAME(COL1,COL2)
+create index my_index on employee_test(emp_name);
+
+--dropping an index
+drop index my_index;
+
+--How do these index works?
+Suppose we need to search by employee name = manoj
+what goes on behind the scences is every single row is checked to see if the emp_name = manoj. This effectively means that entire table will have to be scanned as the full table scan).
+
+->An index is a DS that stores the values for a certain specific column of a table and helps us to avoid a full table scan.
+
+Database indexing in reality, allows us to cut down the number of rows /record that need to be examined when a selec query with a where clause is executed.
+
+B-Tree are the most commonly used DS of indexes as they are time-efficient for lookups, deletion and insertions.
+other DS's are: Hash Tables, Bitmap Index etc.
+
+They query looks for the specific row in the index, the index refers to the pointer which will find the rest of the information.
+
+-some disadvantages of indexes
+
+-> Index takes up additional space, so the larger the table, the bigger will be the index.
+
+->Everytime you perform an add,delete, or update operation, the same operations need to be performed on the index as well.
+
+Q) If we drop a table, does it also drop related objects like contraints, indexes, columns, defaut, views and stored procedures?
+
+Ans: Yes!!, server drops all the related objects, which exist inside a table like constraints, indexes, columns, defaults etc.
+
+but dropping a table will not drop views and sorted procedures as they exist outside the table.
+------------------------------------------------------------
+A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again.
+
+So if you have an SQL query that you write over and over again, save it as a stored procedure, and then just call it to execute it.
+
+You can also pass parameters to a stored procedure, so that the stored procedure can act based on the parameter value(s) that is passed.
+
+
+CREATE PROCEDURE SelectAllCustomers
+AS
+SELECT * FROM Customers
+GO;
+EXEC SelectAllCustomers;
+
+The following SQL statement lists the number of customers in each country, sorted high to low:
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+ORDER BY COUNT(CustomerID) DESC;
+
+The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+
+The following SQL statement lists the number of customers in each country. Only include countries with more than 5 customers:
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5;
+-----------------------------------------------------------
+The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype;
+
+The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+DROP COLUMN Email;
+-----------------foreign key-------------------------
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+
+
+---------------unique key--------------------
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    UNIQUE (ID)
+);
+----------check------------
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CHECK (Age>=18)
+);
+--------------auto increment------
+MySQL uses the AUTO_INCREMENT keyword to perform an auto-increment feature.
+CREATE TABLE Persons (
+    Personid int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (Personid)
+);
+-----------------SQL injection---------------
+SQL injection is one of the most common web hacking techniques,that might destroy your whole database by simply passing sql statement inside any form data.
+To protect a web site from SQL injection, you can use SQL parameters. ?

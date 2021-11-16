@@ -1,0 +1,196 @@
+1.Functional Programming
+2.Lambda Expressions
+3.Stream API's
+-> Till 1.7 we can declare methods in interface but in 1.8 we can defined methods in an interface
+
+1.Functional programming
+Instead of focusing on objects now we are focuing on functions.
+there is two type of technique 
+i.imperative programming and ii. declative programming
+-> in imperative programming we specify what to do it and how to do it
+-> in declrative programming we specify what to do it
+
+2. Lambda expressions
+It helps to reduced the boiler plate code by writing anonymous functions
+()->{return}
+3. Steam API:
+
+->These streams are related to Collcection  Framework(group of objects). There Streams are very much different from IO STREAMS, are   the sequence of data.
+
+-> Introduced in Java 1.8 
+
+-> Stream API is basically to process or manipulate objects of collection.
+
+-> It helps to reduced the boiler plate code
+
+-> It helps to perform the bulk operation on f/w
+----------------------------------------------------------
+filter(): it takes predicate i.e boolean valued function return true or false
+-> Based on true and false it filter the elements.. it checks boolean values on every elements..
+{2,3,4,5,6}
+-> if any element false it will ignore that element
+-> works only one boolean values 
+names.stream().filter(e->e.startsWith("A")).forEach(e->{
+			System.out.println(e);
+		});
+
+map():works on the values
+* On each element we can perform any  operation
+* making square of each element 
+* it takes the one element and apply certain operation and return the value
+	List<Integer> numList = List.of(2,3,4,5,6,1);
+	numList.stream().map(i -> i*i).forEach(e->{
+		System.out.println(e);
+	});
+-----------------------------------------------------------
+java -jar Jenkins.war
+
+---------------------------------------------------------------
+Stream : Sequence of items.
+
+creation of streams:
+//creating an array
+Integer[] myArray = {1,5,8};
+
+//convert it into a stream
+Stream<Integer> myStream = Arrays.stream(myArray);
+
+map(): It takes a lambda expression as its only argument, and uses it to change every individual element in the stream. Its return value is a new Stream object containing the changed elements.
+
+problem: Use map() method to convert all elements in an array of string to upper case
+
+Solution:
+String[] myArray = new String[]{"bob", "alice", "paul", "ellie"};
+Stream<String> myStream = Arrays.stream(myArray);
+
+//map impl
+Stream<String> myNewStream = myStream.map(s->s.toUpperCase());
+
+//coverting myNewStream into an array
+String[] myNewArray = myNewStream.toArray(String[]::new);
+--------------------------------------------------------------
+Filter Method:
+-> In the previous section, you saw that the map method processes every single element in a Stream object. You might not always want that. Sometimes, you might want to work with only a subset of the elements. To do so, you can use the filter method.
+
+Problem: if you have an array of strings, and you want to create a subset of it which contains only those strings whose length is more than four characters
+
+Solution: Arrays.stream(name_of_array)
+		.filter(s -> s.length()>4)
+			.toArray(String[] :: new);
+-------------------------------------------------------------
+Reduce methods:
+Java 8 includes several reduction methods, such as sum, average and count, which allow to perform arithmetic operations on Stream objects and get numbers as results
+	int myArray[] = { 1, 5, 8 };
+	int sum = Arrays.stream(myArray).sum();
+
+sum(), min(), max(), count() etc. are some examples of reduce operations. reduce() explicitly asks you to specify how to reduce the data that made it through the stream.
+
+--------------------------------------------------------------------
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5;
+
+---------------------------------
+The IN operator allows you to specify multiple values in a WHERE clause.
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1, value2, ...);
+WHERE column_name IN (SELECT STATEMENT);
+===============================================================
+LAMBDA Expression:
+It is an anonymous function
+*Without function interface you cannot use lambda expression
+-> No Name
+-> No Modifier
+docker build -t fsuleman2/hdfcappimage -f Dockerfile .
+-> No Return Type
+-> Reduces the lines of Code
+-> Sequenial and Parallel execution support by passing behaviour as an args in methods
+-> To call an API'S Very Effectively
+-> To write more Readable, Maintainable and Consice Code.
+-> If the body of lambda expression contain only one statement then curly braces are optional.
+-> Java compiler also infer the type of variable passed in arguments, hence type is optional.
+ex:
+old fun:
+public void m1(){System.out.println("Hello from old school");}
+
+lambda exp:
+()->{System.out.println("Hello from lambda");}
+
+public int getLength(String str){return str.length();}
+
+(str)->str.length();
+
+--------------------------------------------
+Functional Interface:
+If the interface contains only one abstract methods then it is Functional interface
+ex:Runnable, Callable, Comparable etc.
+To call lambda we require functional interface.
+Lambda is used to implement functional interface in very simple and short maner.
+=======================================================================================================================
+Optional Class: It is basically to avoid null pointer exception at some extend.
+-> also remove boiler plate code
+
+Class Optional<T>
+java.lang.Object
+java.util.Optional<T>
+
+public final class Optional<T>
+extends Object
+-> A container object which may or may not contain a non-null value. If a value is present, isPresent() will return true and get()    will return the value.
+-> Additional methods that depend on the presence or absence of a contained value are provided, such as orElse() (return a default    valueif value not present) and ifPresent() (execute a block of code if the value is present).
+
+-> This is a value-based class; use of identity-sensitive operations (including reference equality (==), identity hash code, or    synchronization) on instances of Optional may have unpredictable results and should be avoided.
+
+Methods:
+-> isPresent();     //true | false
+-> isAbsent();      //true | false
+-> empty();        //return Optional instance
+-> filter();       //accept predicate 
+-> get(); 	   //if value there return value otherwise throws NoSuchElementException
+-> equals(); 	   //compare the objects
+-> ifPresent();   //if a value is present, invoke the specified consumer with the value, else do nothing
+-> of()           //to create optional
+-> ofNullable(T Value) // returns an Optional describing the specified value, if non-null, otherwise returns an empty Optional 
+-> orElse(T other) //Return the value if present, otherwise return other.("message")
+-> orElseGet(Supplier<? extends T> other) //Return the value if present, otherwise invoke other and return the result of that invocation.
+
+Usage: if you are creating a method which return value you must use optional over there.
+value hai to value return hojati
+value nai hai to ek message print hojata using optional
+===============================DESIGN PATTERNS=================
+Why we use design patterns or what is design pattern?
+A design pattern provides a general reusable solution for the common problems that occur in software design. The pattern typically shows relationships and interactions between classes or objects. ... By using design patterns, you can make your code more flexible, reusable, and maintainable.
+
+Example: 
+In many real-world situations, we want to create only one instance of a class. For example, there can be only one active president of a country at any given time. This pattern is called a Singleton pattern. Other software examples could be a single DB connection shared by multiple objects as creating a separate DB connection for every object is costly. Similarly, there can be a single configuration manager or error manager in an application that handles all problems instead of creating multiple managers. 
+
+1)Creational patterns
+->Mostly deals with the creational of objects.
+->This pattern is used to define and describe how objects are     created at class instantiation time
+
+i)Factory method
+ii)Abstract Factory
+iii)Builder
+iv)prototype
+v)Singleton
+
+i)Factory pattern
+-> In the factory pattern, we don't expose the creational login to the client and refer the created object using a standard interface
+
+->Steps:
+1)create main class which call factory class.
+2)Factory class returns required class instance.
+
+
+2)Structural patterns
+Suppose you have 2 indivisual object and you want to whatever features are there inside one object should be used with the another object so in that case we use structural patterns
+
+3)Behavioural patterns
+Suppose you have two objects and you want to make communications between those two objects in that case we use Behavioural pattens.
+
+
+
+
+=========================DESIGN PATTERNS ENDS=================

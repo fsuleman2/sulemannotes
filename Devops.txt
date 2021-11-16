@@ -1,0 +1,68 @@
+Continuous integration (CI) is the practice of automating the integration of code changes from multiple contributors into a single software project
+
+
+Continuious Delivery is to build software so that it is always in a state where it could be put into production. Typically, Continuous Delivery is Continuous Integration plus whatever processes are necessary to prepare for the deployment to production.
+
+you are making it ready for the deployment.
+
+
+Continuous Deployment is one step beyond Continuous Delivery. Instead of manually deploying the application to production, the application will automatically be deployed to production (assuming all tests pass) every time that code is merged into the repository.
+
+*****************Steps to Deploy Angular Application on S3 Bucket.***********
+Step1: ng build –prod
+-It will generate the output folder specified in the angular.json file
+
+Step2:you can navigate to S3 under services -> storage option.
+-you need to choose the bucket name wisely as S3 exposes the URL in the following format
+[BUCKET-NAME].s3-website.[BUCKET-ZONE].amazonaws.com
+
+Step3: Following the bucket name, you need to select the region. It makes sense to select the region closer to the user’s location which will provide faster application performance to the users.
+
+Step4:click on the Create button to finally create our S3 bucket. Once the bucket is successfully created.
+
+Step5:Click on the newly created bucket and then click on the properties tab. You will see a list of cards.
+
+Step6: Click on the “Static website hosting” card to define the entry page and error page for our application. index.html then you are good to go.
+
+******************************Steps to containerize an java application********
+
+step3: create Dockerfile
+
+FROM openjdk:11
+COPY ./target/indianbank.war indianbank.war
+CMD ["java","-jar","indianciapp.war"]
+
+
+Step4: From a terminal/prompt navigate to the root of our project directory.
+	Run this command $docker build -t icicibankapp .
+	t=tagname if not give only id will be displayed
+	. = refer to the current directory.
+---image
+docker images list all the images
+
+Step5: running an image inside the container
+	$docker run -d --name indianbank-container -p 7000:9848 indianbank-imagena
+
+View all running containers: $docker ps -a
+Stop the container $docker stop container name
+Start the container $docker start container name
+Remove container $docker rm containerId //docker rm $(docker ps -a -q)
+Remove image  $docker rmi imagename //docker rm $(docker images -q)
+
+What is a container:
+Container is a software bundled application consist of all the resources, packages that are required to spin an docker image.
+
+What is an docker image?
+They are executable packages(bundled with application code & dependencies, software packages, etc.) for the purpose of creating containers. Docker images can be deployed to any docker environment and the containers can be spun up there to run the application. 
+
+Docker compose
+it an yaml file, is used for creating multiple containers, host them and establish communication between them. For the purpose of communication amongst the containers, ports are exposed by each and every container
+ docker-compose up -d
+ docker-compose down
+
+Docker Volumes are a way to persist data for a container.
+Typically the goal is to have containers exist as mostly stateless. However, sometimes you need information for a container to remain even if the container stops.
+
+Docker Volumes are managed using the CLI and the Docker API.
+----------------------------------------
+Jenkins is a self-contained, open source automation server, which can be used to automate the building, testing and deployment of software.
