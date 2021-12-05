@@ -14,7 +14,7 @@ src code -> fileName.java
 given this file to javacompiler
 javac(java Compiler) fileName.java
  
-on Scuccess compilation we get
+on Success compilation we get
 fileName.class(it Could be bytecode/object code/machine understandable code)
 
 import java.util.Calendar; (Best Practice)
@@ -425,9 +425,18 @@ relationship.
 - StringBuffer and StringBuilder are mutable objects
 - They can update in same memory itself.
 - There is no common pool for these both which means you must create them using new keyword only.
-- StringBuffer and StringBuilder are Thread SafeSimply, thread-safe means
+- StringBuffer is thread safe and StringBuilder is not Thread Safe, thread-safe means
 that a method or class instance can be used by multiple threads at the same time
  without any problems occurring.
+-StringBuffer is less efficient than StringBuilder.
+--Use StringBuffer when you have data that is frequently updated time to time ex:Calculator app or text editor. and use String when your data is fixed such as form data.
+//4 constructors in String Buffer
+StringBuffer()
+StringBuffer(CharSequence seq)
+StringBuffer(String str)
+StringBuffer(int capacity)
+//some predefined methods
+public synchronized int length(),capacity(),append(),insert(),reverse(),delete(),deleteCharAt(),replace(),ensureCapacity(),charAt(),indexOf(),lastIndexOf(),subString(),subSequence(),toString()
 ______________________________________________________________________________________________
 02/07/2021 10:15AM
 Arrays println("arr["+i+"] : "+arr[i]);

@@ -21,7 +21,7 @@ in html5
 -IndexDB
 -WebSQL
 
-framework: comes with read code
+framework: comes with ready code
 here you have to follow some code structure
 -> in terms of performance Angular is not that much code
 ex:Angular

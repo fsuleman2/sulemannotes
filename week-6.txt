@@ -119,7 +119,7 @@ localhost:8080
 /actuator/health.
 /actuator/shutdown
 ----------------------------------------------
-@ \value used for fetch the  value from properties file like @Value("${property.name}"),  @resource= @Autowired+@Qualifier
+@value used for fetch the  value from properties file like @Value("${property.name}"),  @resource= @Autowired+@Qualifier
 ---------------------------------------------------------
 @Controller -presentation layer
 @Service - Service Layer
@@ -173,4 +173,18 @@ spring.jpa.hibernate.ddl-auto=create
 
 # Allows Hibernate to generate SQL optimized for a particular DBMS
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-***********************************SPRING PROPERTIES*****************
+***********************************SPRING PROPERTIES ENDS*****************
+What is annotations?
+Ans: Annotations in java represents meta data. In other words it provides some additional information to the java compiler.
+suppose your name is an annotation and behind it provides your information
+Annoation: @Suleman
+Additional Information attached to annotation:Inside that it could have your FN,LS, address,age and phno etc.
+
+23/11/2021
+Ways to create spring boot project
+1. Create a maven project and add starter dependency spring web
+2. Use spring intilizr
+3. Use IDE like STS
+4. Spring boot command line interface
+
+

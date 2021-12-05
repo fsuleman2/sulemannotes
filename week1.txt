@@ -9,10 +9,11 @@ To make them OO we have wrapper classes whoch actually Wrap" the primitive data 
 https://www.geeksforgeeks.org/java-not-purely-object-oriented-language/
 
 Q) Why pointers are not used in java?
+
 Because:
 1) They are unsafe
-2)Increase the complexity of the porgram and since Java is known for its simplicity of code, adding the concept of pointers will be contradicting.
-3)Since JVM is responsible for the implicit memory allocation, thus in order to avoid direct access to memory by the user, pointers are discouraged in java.
+2) Increase the complexity of the program and since Java is known for its simplicity of    code, adding the concept of pointers will be contradicting.
+3) Since JVM is responsible for the implicit memory allocation, thus in order to avoid    direct access to memory by the user, pointers are discouraged in java.
 
 Q)What is JIT compiler?
 JDK->JVM->JRE

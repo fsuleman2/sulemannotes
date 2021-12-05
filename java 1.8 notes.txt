@@ -15,7 +15,7 @@ It helps to reduced the boiler plate code by writing anonymous functions
 ()->{return}
 3. Steam API:
 
-->These streams are related to Collcection  Framework(group of objects). There Streams are very much different from IO STREAMS, are   the sequence of data.
+->These streams are related to Collcection  Framework(group of objects). There Streams are very much different from IO STREAMS, are the sequence of data.
 
 -> Introduced in Java 1.8 
 
@@ -168,7 +168,7 @@ In many real-world situations, we want to create only one instance of a class. F
 
 1)Creational patterns
 ->Mostly deals with the creational of objects.
-->This pattern is used to define and describe how objects are     created at class instantiation time
+->This pattern is used to define and describe how objects are created at class instantiation time
 
 i)Factory method
 ii)Abstract Factory
@@ -185,7 +185,7 @@ i)Factory pattern
 
 
 2)Structural patterns
-Suppose you have 2 indivisual object and you want to whatever features are there inside one object should be used with the another object so in that case we use structural patterns
+Suppose you have 2 indivisual object and you want to use features of one object so whatever features are there inside one object should be used with the another object so in that case we use structural patterns
 
 3)Behavioural patterns
 Suppose you have two objects and you want to make communications between those two objects in that case we use Behavioural pattens.
