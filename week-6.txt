@@ -25,7 +25,7 @@ It combines @Configuration and @ComponentScan annotations to enable java-based c
 
 @SpringBootApplication = @Configuration + @EnableautoConfiguration + @ComponentScan
 
-@configuration attach on the class and act as a source of bean defincations for the application context.
+@configuration attach on the class and act as a source of bean definations for the application context.
 
 @EnabelAutoConfiguration: Tells Spring boot to start adding beans based on class path settings and on various class path settings. for example if the spring-webmvc is the class path, this annotaion flags the application as a web application and activates the key behaviours such  as setting up a DispatcherServlet.
 
@@ -60,7 +60,12 @@ Whereas @GetMapping is only an extension of @RequestMapping with GET method whic
 
 @GetMapping(value="/user/user{userId}")
 
+-------------------------------------------------------------------------------
+@RequestBody: It basically deserialize the HttpRequest body onto a Java object.
+-Spring automatically deserializes the JSON into a Java type, assuming an appropriate one is specified.
 
+@ResponseBody: It basically automatically serialized into JSON and passed back into the HttpResponse object.
+-------------------------------------------------------------------------------
 9Q) What is the difference between an embedded container and a WAR?
 Ans: The main difference between an embedded container and a WAR file is that you can run Spring Boot App as a JAR from the command prompt without setting up a web server.
 
