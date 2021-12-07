@@ -57,10 +57,10 @@ you can accessed it without creating objects of it.
 
 why not everything will be static?
 java not 100% oops
-2 resons
+2 reasons
 1. static voilating oops(says everyting should be acces via class and objects)
 2. primitives datatypes
-static : if we load eveyting memory get overflow
+static : if we load everything memory will get overflow.
 class product{
 double price; //uncommon;
 String pname; //uncommon;
@@ -112,7 +112,7 @@ double d = f; float to double
 d = m //long to double 
 f = x //int to float
 
-2) Explicit : larger type in size when we assign it to smaller type in size (which should be done by programmer explicitely)
+2) Explicit : larger type in size when we assign it to smaller type in size (which should be done by programmer explicitly)
 ex:
 int c = 98 ;
 char s = (char)c; //explicit
@@ -261,8 +261,8 @@ java follows bottom-up approcah
 constructor invoking is from top to bottom
 interpretor goes top to bottom line by line.
 ________________________________________________________________
-In method overloading return type could be anything, only thing is parameters should be different.
-@overriding : 
+In method overloading return type could be anything, only thing is parameters should not be different.
+@overriding : same name & same parameters
 modification of a existing feature of a parent in child class
 we can override sub class method in subclass itself
 all this done at runtime. because memory is allocated at runtime.
@@ -304,11 +304,11 @@ ________________________________________________________________________________
 5:09
 Abstraction: a class is said to be an abstract class if it having at least one abstract method.
 abstract won't have any body so we can't create object of abstract methods
-abstract methods cannot be static(alreeady defined n loaded) or final
+abstract methods cannot be static(already defined n loaded) or final
 abstract class dont have constructors
 abstraction can be achieved by using interface concept.
 abstract methods can have abstract methods as well non abstract methods
-by creating the object of child class we can call abstract class methods. make sure thaat your subclass should be non abstract.
+by creating the object of child class we can call abstract class methods. make sure that your subclass should be non abstract.
 abstract method/class can have access to any access modifer but can't downgraded it
 ___________________________________________________________________
 01/07/2021
@@ -324,7 +324,7 @@ STATIC AND FINAL. u can omit public.
 Abstract:                                      Interface
 1. abstract class uses abstract keyword        1. Interface use interface as keywords to define themselves they are just class itself
 2. We can extend only one class		       2. We can implement any number of interfaces
-3. any class default visibi will be default    3. any variables declared in interface is considered as static and final/methods() as public and abstract
+3. any class default visibi will be default    3. any variables declared in interface is considered as static and final & methods() as public and abstract
 4. to make anything as static and final in     4. No Constructors
    in classes we must use those keywords	
 5. We can have overloaded constructors which   5. no such thing 
@@ -487,7 +487,7 @@ What is error? What is Exception?
 flow of execution.
 * basically in any application due to user's input or due to
 our logical error it may lead to abnormal termination of a application which
-is a very bad practise, an application which terminates abnormally
+is a very bad practice, an application which terminates abnormally
 is considered as 0 quality app and nobody wishes to buy or get such
 application.
 *Exception handling will help you handle the exceptions which has been
