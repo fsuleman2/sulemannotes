@@ -1,0 +1,21 @@
+student magmt system
+schema_name : student_schema
+model->
+Table: Students
+student id
+student name
+student age
+student address
+CREATE
+READ-> by id
+UPDATE by id
+DELETE-> by id
+
+
+---------------------------------------------------------
+template:`<h1>Hello World<h1>` and templateUrl:'./app.component.html'
+Data Binding:
+	Interpolation {{}}      Template <----  Component
+	Property Binding []	Template <----  Component
+	Event Binding ()	Template ---->  Component
+	Two-way Binding [()]	Template <----> Component

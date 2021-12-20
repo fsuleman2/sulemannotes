@@ -1,0 +1,9 @@
+Spring MVC
+Client sends a request-->this request goes to web.xml-->web.xml file will redirect this request to--->Frontcontroller(DispatcherServlet)--->DispatcherServlet will see the incoming request ohh it is for login then it will redirect the request to the --->/login Controller--->it will do some backend processing that is generate the model by calling the service and repository and return back to dispatcher servlet with data(model) and the page name. after receiving data and view name wht D.S will do is look for the particular view and bind the data to the view template i.e jsp or html and send a response back to the client.
+
+by using the config file that is dispatcher servlet you can have freedome to use any front end techn you wish.. you just have to change web.xml file and frontcontroller config settings that it.. you don't have to distrub another backend controller.
+POM:Project Object Model
+----------------------------------------------------------------
+15-dec-2021
+->OOPS is a paradim or style of writing a consise , readable and reusable code.
+->Class:
