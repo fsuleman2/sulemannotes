@@ -15,7 +15,7 @@ It helps to reduced the boiler plate code by writing anonymous functions
 ()->{return}
 3. Steam API:
 
-->These streams are related to Collcection  Framework(group of objects). There Streams are very much different from IO STREAMS, are the sequence of data.
+->These streams are related to Collection  Framework(group of objects). There Streams are very much different from IO STREAMS, are the sequence of data.
 
 -> Introduced in Java 1.8 
 
@@ -100,7 +100,7 @@ WHERE column_name IN (SELECT STATEMENT);
 ===============================================================
 LAMBDA Expression:
 It is an anonymous function
-*Without function interface you cannot use lambda expression
+*Without functional interface you cannot use lambda expression
 -> No Name
 -> No Modifier
 docker build -t fsuleman2/hdfcappimage -f Dockerfile .
@@ -127,7 +127,7 @@ Functional Interface:
 If the interface contains only one abstract methods then it is Functional interface
 ex:Runnable, Callable, Comparable etc.
 To call lambda we require functional interface.
-Lambda is used to implement functional interface in very simple and short maner.
+Lambda is used to implement functional interface in very simple and short manner.
 =======================================================================================================================
 Optional Class: It is basically to avoid null pointer exception at some extend.
 -> also remove boiler plate code
