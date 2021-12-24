@@ -25,11 +25,11 @@ It combines @Configuration and @ComponentScan annotations to enable java-based c
 
 @SpringBootApplication = @Configuration + @EnableautoConfiguration + @ComponentScan
 
-@configuration attach on the class and act as a source of bean defincations for the application context.
+@configuration attach on the class and act as a source of bean definations for the application context.
 
 @EnabelAutoConfiguration: Tells Spring boot to start adding beans based on class path settings and on various class path settings. for example if the spring-webmvc is the class path, this annotaion flags the application as a web application and activates the key behaviours such  as setting up a DispatcherServlet.
 
-@ComponentScan(basepackge={"mypack"},{""}) : Tells the Spring where to look for the components, confifurations and Services in the application and also letting it find the controllers.
+@ComponentScan(basepackge={"mypack"},{""}) : Tells the Spring where to look for the components, configurations and Services in the application and also letting it find the controllers.
 
 
 the main() method uses Spring Boot's SpringApplication.run() method to run the application.
@@ -107,10 +107,10 @@ it could be helpfull in checking health of your application.
 ->info on how many are registered
 > info on mapping and end points
 -> shutdown your application etc
-with the help of actual you will be provided with end points by using end points you can monitor and manage your application
+with the help of actuator you will be provided with end points by using end points you can monitor and manage your application
 -> it can be enable by adding actuator dependency.
 
-if end points are publicy available then anybody can shutdown you application.. so to protect that we can take help of spring security and secure actuator endpoints by making it secure so that only a designated person can manage those endpoints rather than the public user.
+if end points are publicly available then anybody can shutdown you application.. so to protect that we can take help of spring security and secure actuator endpoints by making it secure so that only a designated person can manage those endpoints rather than the public user.
 
 Q12) how to get all the list of all the beans in your spring boot application?
 ans: 
@@ -140,9 +140,9 @@ public Student home(@RequestBody Student s1){}
 Jo bhi data frontend se ara hoga in the form of JSON that will be auto converted into java or deserilize and stored it into s1 object.
 
 @PathVariable : if user is sending any URI Data thru URL that u want to catch and bind it to java variable or object u can do it so by using @PathVariable
-
+suppose you want to fetch details of student  for specific id localhost:8080/name/1
 @RequestParam to extract query parameters, form parameters, and even files from the request.
-
+sending username and password for login
 @RequestParam and @PathVariable can both be used to extract values from the request URI, but they are a bit different.
 
 @RequestParams extract values from the query string, @PathVariables extract values from the URI path:
@@ -187,4 +187,22 @@ Ways to create spring boot project
 3. Use IDE like STS
 4. Spring boot command line interface
 
+-------------------------------------------
+Spring will automatically import the beans into the container and inject to dependencies. These annotations are called Stereotype annotations as well.
 
+
+@Component:It is a generic stereotype annotation used to mark a java class as a bean so that component-scanning mechanism of spring can pick it up and pull it into the application context.
+
+@Controller : If a bean or class which is responsible for handling the request and generating a response that bean or class must be annotated with @Controller.
+
+@Repository
+The @Repository annotation marks a class to be used as a for use with storing data within a repository or database. Specifically, the @Repository annotation provides benefits for objects that would otherwise be utilized as a Data Access Object (DAO).
+
+@Service
+We mark beans with @Service to indicate that they're holding the business logic. Besides being used in the service layer, there isn't any other special use for this annotation.
+
+@Bean is used to explicitly declare a single bean, rather than letting Spring do it automatically for us.
+
+In conclusion, it's always a good idea to choose the annotation based on their layer conventions.
+
+Another big difference is that @Component is a class level annotation where as @Bean is a method level annotation and ,by default, name of the method serves as the bean name.
