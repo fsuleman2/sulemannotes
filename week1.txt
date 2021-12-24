@@ -105,7 +105,7 @@ Diadvantage:Tightly coupled.
 
 1.Inheritance(IS-A) :inheriting properties of parent class into child class.
 we can do it by using classA extends ClassB
-classB can access evtrhing except constrctr and private fields.
+classB can access everything except constrctr and private fields.
 
 class vehicle{}
 class car extends vehicle{}
@@ -113,7 +113,7 @@ class car extends vehicle{}
 but due to this approch our classes become tightly coupled, means if changes made in classA it will be reflected in all the child classes of ClassA.
 
 2.Association(HAS-A)
-i)Aggregation(Weak) it's a weak relationship where one object can exist without the other objecct.
+i)Aggregation(Weak) it's a weak relationship where one object can exist without the other object.
 ex:car and music player
 ii)Composition(Strong) it's a strong relationship where one object cannot exist without the other objecct.
 ex:car and engine
