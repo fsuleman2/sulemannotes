@@ -1,8 +1,9 @@
 project
 -breif description
 Banking Management App is web based java application which allows users to open an account, Deposit amount, widthdraw amount, transfer amount and also provide facility to view previous statements.
+
 -challenges you faced
-Building an web application by following 3-tier archi is completely new for me so it took time to manage everything on separate separate layer
+Building an web application by following 3-tier archi is completely new for me so it took time to manage everything on separate layer
 
 -what's your role
 -what technologies you have used
@@ -287,7 +288,8 @@ Pricing will be different from Chair Type/Sleeping Type
 
 ADMIN:
 Responsibilities
--> As a admin, I can add a route or remove a route with train name and train number
+-> As a admin, I can add a route or remove a route with train name and train number.
+
 -> As a admin, I can add stopping point or remove stopping point in each route, each stopping point should have a name
 
 -> As a admin, I can  fix the price - general price - of age 6-60 for that route.
@@ -303,6 +305,7 @@ name, email, phone, address with login user name &
 password.
 
 -> Each login user to this application should have one identity proof like driving license/pan/aadhar
+
 -> Each login user can add their family or friends with name, age, gender, if physically challenged or not - maintain a list.
 
 -> Each login user can reserve for 5-10 seats not more than that
