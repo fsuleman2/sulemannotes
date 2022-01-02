@@ -1,7 +1,7 @@
 Q1)Is it possible to change the port of the embedded Tomcat Server in Spring boot?
 Ans: Yes, by using the server.port = 9090 in the application.properties. (key value pair)
 
-Q2) Cam we Override or replace the embedded tomcat server in Spring boot?
+Q2) Can we Override or replace the embedded tomcat server in Spring boot?
 Ans: Yes, we can replace the Embedded Tomcat server with any server by using the Starter dependency in the pom.xml file.
 
 we can use <exclusions><exclusion>the dependency you want to exclude</exclusion></excluions>

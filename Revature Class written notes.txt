@@ -31,14 +31,14 @@ java use 'default' as default access modifer
 public class FirstJavaClass{}
 default : within the folder like ur friends within the package
 private : only me
-protect  means : relationship should be there
+protected  means : relationship should be there
 public : access everywhere
 we can't have two public class in same .java file
 we can have any number of default classes
 we can't have private,protected classes as outer classes(ouside of class means class classname{psvm{}}, but we can have inner private protected public default static classes outside of main within the psvm.
 classname and file name should be same
 follow name convention => MyFirstJavaClass
-compiler follow nameing convention for subclasses
+compiler follow naming convention for subclasses
 mainclassname$subclassname
 ___________________________________________________
 public static void main(String[] args){}

@@ -137,7 +137,7 @@ if we create object of Engine class in Car, we get choice what properties we can
 having a HAS-A relationship we code changes can be easier.
 ----------------------------------------------------------
 Collection Framework is most powerful sub-system in java that provides various interfaces such as LIST,SET,QUEUES and MAP
-that helps the developers to manage group objects.
+that helps the developers to manage group of objects.
 
 Q)Why Map Does not extend the Collection Interface?
 ->First of all Map Interface in java follows a key/value pair structure where as the Collection interface is a collection of objects which are stored in a structured manner with a access mechanism.

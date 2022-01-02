@@ -1,5 +1,6 @@
-1.How would you describe AWS? What is “the cloud” or “cloud computing” and why is it so   popular now?
-WS (Amazon Web Services) is a comprehensive, evolving cloud computing platform provided by Amazon that includes a mixture of infrastructure as a service (IaaS), platform as a service (PaaS) and packaged software as a service (SaaS) offerings.
+﻿1.How would you describe AWS? What is “the cloud” or “cloud computing” and why is it so   popular now?
+
+AWS (Amazon Web Services) is a comprehensive, evolving cloud computing platform provided by Amazon that includes a mixture of infrastructure as a service (IaaS), platform as a service (PaaS) and packaged software as a service (SaaS) offerings.
 
 Cloud computing is the delivery of on-demand computing services -- from applications to storage and processing power -- typically over the internet and on a pay-as-you-go basis.
 
