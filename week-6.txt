@@ -388,7 +388,7 @@ private static Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class
 logger.warn()
 logger.info,error,debug,trace,fatal
 
-
+	private static Logger log = LoggerFactory.getLogger(LoggingAspect.class); //sl4j
 
 -----------------------------Spring AOP
 -> Aspect is a class that implements cross-cutting concerns. To declare a class as an Aspect it should be annotated with @Aspect annotation. It should be applied to the class which is annotated with @Component annotation or with derivatives of it.
@@ -436,3 +436,111 @@ To use Spring AOP and AspectJ in the Spring Boot project you have to add the spr
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-aop</artifactId>
 </dependency> 
+
+
+@Pointcut:
+
+Pointcut represents an expression that evaluates the method name where advice should be executed. If you want to use single pointcut in multiple places, you can declare the pointcut using @pointcut annotation in one common class or in the same class and make use of it in different aspect classes and methods.
+
+A pointcut declaration has below parts:
+
+    1) Pointcut Signature
+
+    2) Pointcut Expression 
+
+@Pointcut("execution(* com.infosys.service.CustomerServiceImpl.fetchCustomer(..))") //pointcut expression
+public void logFetchCustomer() {	} // pointcut signature
+
+Note: The pointcut signature ‘s return type must be void .
+
+Advantage of using a @Pointcut is that the same pointcut expression can be used with different advices.
+
+
+@Profile helps spring to identify the beans that belong to a particular environment.  
+
+@Profile for Class level:
+
+@Profile("dev")
+@Component
+@Aspect
+public class LoggingAspect { }
+
+Note: This LoggingAspect class will run only if “dev” 
+
+@Profile- for Method level:environment is active.
+
+@Configuration
+public class SpringConfiguration {
+@Bean("customerService")
+@Profile("dev")
+public CustomerService customerServiceDev() {
+CustomerService customerServiceDev= new CustomerService();
+customerServiceDev.setName("Developement-Customer");
+return customerServiceDev;
+}
+@Bean("customerService")
+@Profile("prod")
+public CustomerService customerServiceProd() {
+CustomerService customerServiceProd=new CustomerService();
+customerServiceProd.setName("Production-Customer");
+return customerServiceProd;
+}
+}
+Note: @Profile annotation in class level should not be overridden in the method level. It will cause “NoSuchBeanDefinitionException”.
+
+
+@Profile value can be prefixed with !(Not) operator.
+
+@Profile("!test")
+@Configuration
+@ComponentScan(basePackages="com.infy.service")
+public class SpringConfiguration { }
+
+Note:This SpringConfiguration class will run in all environments other than test. 
+
+if you don't apply @profile annotation on a  class, means that the particular bean is available in all environment(s). 
+
+Spring Boot relies on application.properties file for configuration. To write configuration based on environment, you need to create different application.properties files. The file name has a naming convention as application-<user created profile name>.properties
+ex:
+application-dev.properties  
+application-prod.properties
+application-test.properties    
+
+How to activate profile?
+can be done in three ways i)inside app.prop file ii)jvm based
+and iii)pom.xml based
+To set an active profile you need to write  the below property in the main application.properties file.
+
+spring.profiles.active=dev
+spring.profiles.active=dev,prod
+
+If we want to create a stateless bean then singleton scope is the best choice. In case if you need a stateful bean then choose prototype scope.
+
+When to choose  Constructor-based DI and setter-based DI in Spring /Spring boot applications
+A Spring application developer can mix the Constructor injection and Setter injection in the same application but it's a good practice to use constructor injection for mandatory dependencies and Setter injection for optional dependencies. 
+
+Pointcut Designators:
+
+A pointcut expression starts with pointcut designators, which tells you where the pointcut will be executed.  The designators are:
+
+execution
+within
+this
+target
+args
+@within
+@target
+@annotation
+
+1) execution: used for matching any method name.( you have already seen demo for execution designator).
+
+@Pointcut("execution(* com.infosys.service.CustomerServiceImpl.updateCustomer(..))")
+public void logUpdateCustomer() {}
+
+within : used for any method present under the class or package . For example below first pointcut will match all the methods inside the CustomerServiceImpl class and second pointcut will match all the methods under service package.
+
+@Pointcut("within(com.infosys.service.CustomerServiceImpl)")
+public void logall() {}
+	
+@Pointcut("within(com.infosys.service.*)")
+public void logallMethods() {}
