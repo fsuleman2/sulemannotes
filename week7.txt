@@ -177,3 +177,92 @@ Containers are easiest and effective method to manage the microservice based app
 13Q) How independent micro-services communicate with each other?
 It depends upon your project needs. However, in most cases, developers use HTTP/REST with JSON or Binary protocol. However, they can use any communication protocol.
 
+======================================================
+------------ Durgesh MSA Videos Part-1----------
+Disadvantages of MONOLITHIC APP
+1.As project grows, it becomes difficult to manage.
+2.For Single change in code, requires redeployment of whole application needed.
+3.Difficult to adapt new technology for single functionality
+4.Single bug may down your application.
+
+Advantages of MONOLITHIC APP
+1.Simple to Develop
+2.Simple to build and deploy
+3.Requires less resources and network latency is relatively less.
+
+Q)What are Microservices
+-> Microservices are the small services that works together,these smaller services communicating with each other directly using light weight protocols like http.
+
+***Advantages of Microservices:
+->It is possible to change or upgrade each service indivisually rahter than upgrading in the entire application
+->One Service may down without impacting to others.
+->Easily use different technology for building different microservices.
+->Less dependency,Loosely coupled
+========================================
+DISCOVERY SERVICE(Eureka Server)
+
+->In MSA, applications are built up of self sufficient units, which can be deployed and updated independently and communicate with each other via REST API'S. 
+
+->One of the challenges in a MSA is how services are discover and connect to each other, because services are discovered and destroyed according to scaling needs.
+
+-> Fixed IP addresses don't work, so we need a service registry to track the dynamic changes in the network locations of service instances.
+
+->Eureka Server is an application that holds the information about all client-service applications. 
+
+->Every Micro service will register into the Eureka server and Eureka server knows all the client applications running on each port and IP address. Eureka Server is also known as Discovery Server.
+
+->The registry maintains a heartbeat mechanism to see if services are still up and if not, removes them from the registry.
+
+->Netflix Eureka is a good example of a service registry.
+
+->It provides a REST API for registering and querying service instances. A service instance registers its network location using a POST request. Every 30 seconds it must refresh its registration using a PUT request.
+
+->A registration is removed by either using an HTTP DELETE request or by the instance registration timing out. A client can retrieve the registered service instances by using an HTTP GET request.
+
+->Harshicorp Consul is also one of the example of Disovery service. 
+
+API GATEWAY:
+->An Api gateway sits between the client and a collection of backend services. The API gateway takes all API Request from a client, determines which services are needed, and combimnes them into a synchronous experience to the user.
+
+For most microservices-based applications, an API gateway acts as a single entry point into a system. The API gateway is responsible for request routing, composition, and protocol translation, and can streamline the system.
+
+->It handles some requests by simply routing them to the appropriate backend service, and handles others by invoking multiple backend services and aggregating the results. If there are failures in the backend services, the API gateway can mask them by returning cached or default data. 
+ex:Zul gateway and Spring Cloud gateway.
+
+LOAD BALANCING(Ribbon):
+When multiple instances of each microservices are deployed there might be a chance one service may get overworked and cause failure of services, to ensure that all incoming requests are spread across all of the available instances, rather than overloading some instances at the same time, while other services are underutilized, load balancing is used.
+
+It acts as a traffic cop sitting infront of our servers and routs client request across all servers capable of fullfiling the request.
+
+->It does so in manner that maximum speed and capacity is utilized and ensure that no service is overworked which could degrade application performance. 
+
+->If a single server goes down, the load balancer redirects the traffic to the remaining online servers.
+
+->When a new server is added to the server group, the load balancer automatically starts sending request to it.
+
+Example: Netflix Ribbon is a client side load balancer that gives you a lot of control over the behaviour of HTTP  and TCP Client.
+
+So here Api gateway such as zul or spring internally uses Ribbon to lookup for all the instances of the service from the service discovery(netflix eureka server) and routes the external request to an appropirate service instance.
+By default RIBBON uses round robbin to lookup services available.
+
+CIRCUIT BREAKER(Hystrix):
+Services sometimes collaborate when handling requests. When one service synchronously invokes another there is always the possibility that the other service is unavailable or is exhibiting such high latency that it's essentially unusable. Precious resources such as threads might be consumed in the caller while waiting for the other service to respond. This might lead to resource exhaustion, which would make the calling service unable to handle other requests. The failure of one service can potentially cascade to other services throughout the application.
+
+To prevent a network or service failure from cascading to other services, we use the circuit breaker pattern for building a microservice application.
+
+A circuit breaker wraps a function call with a monitor where the monitor will be tracking potential failures. If the service is in the failed stage, the circuit will send the error message without making a call. If the service is up, then breaker forwards the call to the needed service.
+
+The circuit breaker has 3 distinct states –
+
+1) Closed State - When service is up and running, the circuit breaker remains in the closed state and all calls pass through to the services.
+
+2)Open State - When the number of failures exceeds a predetermined threshold the breaker trips, and it goes into the Open state. In the OPEN state the circuit breaker returns an error for all calls to the service without making the calls to the Supplier Microservice.
+
+3)Half-Open State -
+The circuit breaker makes a trial call to the failed service periodically to check if it has recovered. If the call to the service times out, the circuit breaker remains in the Open state. If the call returns successfully, then the circuit switches to the closed state.
+
+
+-> Hystrix is a fault tolerence library.
+When you apply a circuit breaker to a method, Hystrix watches for failing calls to that method, and if failures build up to a threshold then Hystrix opens the circuit so that subsequent calls automatically fail. While the circuit is open, Hystrix redirects calls to the method, and they are passed to your specified fallback method.
+
+@EnableHystrix annotation tells Spring Cloud that the reading application uses circuit breaker (Hystrix) and to enable their monitoring, opening, and closing.

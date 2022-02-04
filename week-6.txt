@@ -206,3 +206,233 @@ We mark beans with @Service to indicate that they're holding the business logic.
 In conclusion, it's always a good idea to choose the annotation based on their layer conventions.
 
 Another big difference is that @Component is a class level annotation where as @Bean is a method level annotation and ,by default, name of the method serves as the bean name.
+
+==============================================================Spring MVC from LEX
+->This DispatcherServlet handles all the request of the application.
+->So all the requests to the application has to be forwaded to dispatcherServlet.
+->This can be done in web.xml
+<servlet>
+<servlet-name>dispatcher</servlet-name>
+<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>dispatcher</servlet-name>
+<url-pattern>*.htm</url-pattern>
+</servlet-mapping>
+once DispatcherServlet is initilized in web.xml now you have to give config file with naming convention
+
+dispatcher-servlet.xml
+
+<servlet>
+<servlet-name>dispatcher</servlet-name>
+<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+</servlet>
+
+Special beans in webApplicationContext are:
+-Controller
+-Handler Mapper
+-View Resolver
+
+Anyclass with @Controller annotation can act as a controller class.
+
+@RequestMapping annotation maps request to handler methods in the controller
+
+@Controller facilitates auto-detection of controllers which eliminates the need for configuring the controllers in DispatcherServlet's configuration file.
+
+<context:component-scan base-package="specify controller package here"/>
+first letter will auto be small letter.
+
+package mypack;
+
+@controller
+public class MyController{
+
+@RequestMapping("/hello.htm")
+public ModelAndView sayGreeting(){
+
+}
+}
+
+dispatcherservlet.xml and web.xml should be in WEB-INF folder
+
+@Component should be used when your class does not fall into either of three categories i.e. Controllers, Services, and DAOs.
+By default, the bean names are derived from class names with a lowercase initial character. Therefore, your above defined beans have the names customerController, customerServiceImpl, and customerRepositoryImpl. It is also possible to give a specific name with a value attribute in those annotations as follows:
+@Repository(value="customerRepository")
+
+public class CustomerRepositoryImpl  implements CustomerRepository{	
+	//rest of the code
+}
+
+@Configuration
+@ComponentScan(basePackages = "com.infy.service,com.infy.repository")
+public class SpringConfiguration {
+}
+
+
+application.properties
+message = Welcome to Spring
+
+@AutoWired
+Enivronment env;
+
+env.getProperty("message")
+
+Q:how to load other properties file data?
+
+for exmple: InfyTelMessage.properties is a file and you want to read data from this.
+
+Solution: by using @PropertySource("classpath:InfyTelmessage.properties")
+
+then next step is 
+@AutoWired 
+Environment env;
+env.getProperty("message")
+
+
+@ComponentScan – This enables the Spring bean dependency injection feature by using @Autowired annotation. All application components which are annotated with @Component, @Service, @Repository, or @Controller are automatically registered as Spring Beans. These beans can be injected by using @Autowired annotation.
+
+
+The class that is annotated with @SpringBootApplication will be considered as the main class, is also a bootstrap class. It kicks starts the application by invoking the SpringApplication.run() method.  You need to pass the .class file name of your main class to the run() method.
+
+
+Other than the main class package if any other classes in other packages are essential to be scanned then the package name should be specified using the scanBasePackages attribute.
+
+
+@SpringBootApplication(scanBasePackages = "com.infosys.irs")
+
+
+//setter base autowiring
+package com.infy.service;
+public class CustomerServiceImpl implements CustomerService {
+	
+	private CustomerRepository customerRepository;
+	@Autowired
+	public void setCustomerRepository(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
+      --------
+}
+
+
+//constr based autowiring
+
+package com.infy.service;
+public class CustomerServiceImpl implements CustomerService {
+		
+	private CustomerRepository customerRepository;
+	@Autowired
+	public CustomerServiceImpl(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
+     --------------
+}
+
+If the container does not find a bean for autowiring, it will throw the NoSuchBeanDefinitionException exception.
+
+If more than one beans of the same type are available in the container, then the framework throws an exception indicating that more than one bean is available for autowiring. To handle this @Qualifier annotation is used as follows: 
+
+package com.infy.service;
+public class CustomerServiceImpl {
+	@Autowired
+        @Qualifier("custRepo")
+	private CustomerRepository customerRepository;
+         ------------
+}
+
+In Spring @Value annotation is used to insert values into variables and method arguments. Using @Value we can either read spring environment variables or system variables. 
+
+We can assign a default value to a class property with @Value annotation:
+
+public class CustomerDTO {
+	@Value("1234567891")
+	long phoneNo;
+	@Value("Jack")
+	String name;
+	@Value("Jack@xyz.com")
+	String email;
+	@Value("ANZ")
+	String address;
+}
+
+Note that it accepts only a String argument but the passed-in value gets converted to an appropriate type during value-injection.
+
+To read a Spring environment variable we can use @Value annotation:
+
+public class CustomerDTO {
+	@Value("${value.phone}")
+	long phoneNo;
+	@Value("${value.name}")
+	String name;
+	@Value("${value.email}")
+	String email;
+	@Value("${value.address}")
+	String address;
+}
+
+
+The bean scope can be defined for a bean using @Scope annotation in Java class. By default, the scope of a bean is the singleton
+
+@Service("customerService")
+@Scope("singleton")
+public class CustomerServiceImpl implements CustomerService {
+
+For the "prototype" bean, there will be a new bean created for every request from the application.
+
+@Service("customerService")
+@Scope("prototype")
+public class CustomerServiceImpl implements CustomerService {
+
+private static Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+
+logger.warn()
+logger.info,error,debug,trace,fatal
+
+
+
+-----------------------------Spring AOP
+-> Aspect is a class that implements cross-cutting concerns. To declare a class as an Aspect it should be annotated with @Aspect annotation. It should be applied to the class which is annotated with @Component annotation or with derivatives of it.
+
+->Joinpoint is the specific point in the application such as method execution, exception handling, changing object variable values, etc. In Spring AOP a join point is always the execution of a method.
+
+->Advice is a method of the aspect class that provides the implementation for the cross-cutting concern. It gets executed at the selected join point(s). 
+
+
+The following table shows the different types of advice along with the execution point they have.
+
+Before: Before advice is executed before the Joinpoint execution.
+
+After: After advice will be executed after the execution of Joinpoint whether it returns with or without exception. Similar to finally block in exception handling.
+
+AfterReturning:AfterReturning advice is executed after a Joinpoint executes and returns successfully without exceptions.
+
+AfterThrowing: AfterThrowing advice is executed only when a Joinpoint exits by throwing an exception.
+
+Around: Around advice is executed around the Joinpoints which means Around advice has some logic which gets executed before Joinpoint invocation and some logic which gets executed after the Joinpoint returns successfully.
+
+->Pointcut represents an expression that evaluates the method name before or after which the advice needs to be executed.
+
+->The business methods of the program before or after which the advice can be called is known as a Joinpoint.
+
+->The advice does not get inserted at every Joinpoint in the program.
+
+->An Advice gets applied only to the Joinpoints that satisfy the Pointcut defined for the advice.
+
+->Pointcut represents an expression that evaluates the business method name before or after which the advice needs to be called.
+
+execution(<modifiers> <return-type> <fully qualified class name>.<method-name>(parameters))
+
+ex:
+@Before("execution(* com.infosys.service.CustomerServiceImpl.create(..))")
+
+'*' refers to any return type
+(..) refers to 0 or more args
+
+
+
+To use Spring AOP and AspectJ in the Spring Boot project you have to add the spring-boot-starter-aop starter in the pom.xml file as follows:
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+</dependency> 

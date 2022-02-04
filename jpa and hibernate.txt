@@ -37,6 +37,12 @@ hibernate.hgbm.xml
 
 
 
+@Entity is useful with model classes to denote that this is the entity or table
+
+@Table is used to provide any specific name to your table if you want to provide any different name
+
+Note: if you don't use @Table then hibernate consider that @Entity is your table name by default and @Entity 
+must.
 
 //for JPA
 EnityManagerFactory emf = Persistence.createEnityManagerFactory("entity name");
@@ -175,8 +181,7 @@ System.out.println(e.get(0));
 //CRITERA API DEMO
 Hibernate Criteria are a programmatic and typesafe way to fetch data from the relational database.
 
-In other words, criteria use explicit methods and return types to fetch data,
-, rather than requiring you to write queries as Strings that might contain typos,
+In other words, criteria use explicit methods and return types to fetch data,rather than requiring you to write queries as Strings that might contain typos,
 and can't be easilly parsed to determine what the resulting type of data will be.
 
 -> javax.persistence.criteria.CriteriaQuery interface provides many methods to specify criteria

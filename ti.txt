@@ -1,0 +1,20 @@
+hash object.
+Iterator it=new has.iterator
+while(it.hasNext()){
+it.next()
+}
+al.get(size-1)//last
+al.get(0)//first
+for()
+{
+if(){
+break}
+
+}
+
+list of integers 1 to 10 
+ArrayList<Integer> al = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+al.Stream().filter(i%2==0 -> System::out.println);
+al.stream().
+
+ 

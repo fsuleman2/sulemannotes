@@ -1,4 +1,5 @@
-JVM (Java Virtual Machine): During the development of Java, the developers faced many problems because as the OS gets updated, the system was not able to run the previously written codes. To rectify this problem, JVM came into existence. It is an abstract machine that is present in the user’s computer and converts the bytecode into machine code.
+
+/JVM (Java Virtual Machine): During the development of Java, the developers faced many problems because as the OS gets updated, the system was not able to run the previously written codes. To rectify this problem, JVM came into existence. It is an abstract machine that is present in the user’s computer and converts the bytecode into machine code.
 
 JRE (Java Runtime Environment): JRE refers to a software package in which java bytecode can be executed. It implements the JVM (Java Virtual Machine) and provides all the class libraries and other support files that JVM uses at runtime.
 

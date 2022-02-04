@@ -106,7 +106,7 @@ It is an anonymous function
 docker build -t fsuleman2/hdfcappimage -f Dockerfile .
 -> No Return Type
 -> Reduces the lines of Code
--> Sequenial and Parallel execution support by passing behaviour as an args in methods
+-> Sequential and Parallel execution support by passing behaviour as an args in methods
 -> To call an API'S Very Effectively
 -> To write more Readable, Maintainable and Consice Code.
 -> If the body of lambda expression contain only one statement then curly braces are optional.
@@ -129,6 +129,23 @@ ex:Runnable, Callable, Comparable etc.
 To call lambda we require functional interface.
 Lambda is used to implement functional interface in very simple and short manner.
 =======================================================================================================================
+Package in Java is a mechanism to encapsulate a group of classes, sub packages and interfaces. Packages are used for:
+
+Preventing naming conflicts. For example there can be two classes with name Employee in two packages, college.staff.cse.Employee and college.staff.ee.Employee
+Making searching/locating and usage of classes, interfaces, enumerations and annotations easier
+Providing controlled access: protected and default have package level access control. 
+
+A protected member is accessible by classes in the same package and its subclasses. A default member (without any access specifier) is accessible by classes in the same package only.
+
+Packages can be considered as data encapsulation (or data-hiding).
+All we need to do is put related classes into packages. After that, we can simply write an import class from existing packages and use it in our program. 
+
+A package is a container of a group of related classes where some of the classes are accessible are exposed and others are kept for internal purpose.
+We can reuse existing classes from the packages as many time as we need it in our program.
+
+
+
+
 Optional Class: It is basically to avoid null pointer exception at some extend.
 -> also remove boiler plate code
 
@@ -138,7 +155,8 @@ java.util.Optional<T>
 
 public final class Optional<T>
 extends Object
--> A container object which may or may not contain a non-null value. If a value is present, isPresent() will return true and get()    will return the value.
+-> A container object which may or may not contain a non-null value. If a value is present, isPresent() will return true and get() will return the value.
+
 -> Additional methods that depend on the presence or absence of a contained value are provided, such as orElse() (return a default    valueif value not present) and ifPresent() (execute a block of code if the value is present).
 
 -> This is a value-based class; use of identity-sensitive operations (including reference equality (==), identity hash code, or    synchronization) on instances of Optional may have unpredictable results and should be avoided.
@@ -159,6 +177,96 @@ Methods:
 Usage: if you are creating a method which return value you must use optional over there.
 value hai to value return hojati
 value nai hai to ek message print hojata using optional
+===============================================
+->Functional Interfaces and Lamdbda Expressions
+->forEach() method in Iterable interface
+->Optional Class
+->default and static methods in Interface
+->method referece ::
+->Stream API for performing bulk operations on Collections
+->Java Date Time API
+->Collection API Improvements
+->Concurrency API Improvements
+->Nashhorn JS Engine
+===============================================
+->Functional Interfaces and Lamdbda Expressions
+@FunctionalInterface
+public interface MyFirstFunctionalInterface {
+	public void firstWork();
+}
+Note:You can omit the annotation, @FunctionalInterface and your functional interface will still be a valid one. 
+We use this annotation just to inform the compiler that the interface will have a single abstract method and also to avoid compiler time errors.
+#Inside @FI you can have default as well as non abstract method/static as many as you want.
+---------------------------------------------------
+A Lambda Expression (or function) can be defined as an anonymous function, (a function with no name and an identifier). Lambda Expressions are defined exactly in the place where they are needed, usually as a parameter to some other function.
+
+#Lambda Expressions implement the only abstract function present in the functional interface and thus implement functional interfaces.
+Syntax:
+Either
+(parameters)->expression;
+or
+(parameters)->{statements;}
+or
+()->expression
+
+CODE EXAMPLE:
+
+interface MyInterface 
+{ 
+     void abstract_func(int x,int y); 
+
+     default void default_Fun() 
+    { 
+         System.out.println("This is default method"); 
+    } 
+} 
+
+class Main 
+{ 
+     public static void main(String args[]) 
+    { 
+        //lambda expression
+        MyInterface fobj = (int x, int y)->System.out.println(x+y); 
+
+        System.out.print("The result = ");
+        fobj.abstract_func(5,5); 
+        fobj.default_Fun();
+    } 
+}
+---------------------------------------------------
+->forEach() method in Iterable interface
+Java 8 has introduced a “forEach” method in the interface java.lang.Iterable that can iterate over the elements in the collection. “forEach” is a default method defined in the Iterable interface. It is used by the Collection classes that extend the Iterable interface to iterate elements.
+
+The “forEach” method takes the Functional Interface as a single parameter i.e. you can pass Lambda Expression as an argument.
+Example of the forEach() method.
+
+importjava.util.ArrayList;  
+importjava.util.List;  
+public class Main {  
+     public static void main(String[] args) {  
+        List<String> subList = new ArrayList<String>();  
+        subList.add("Maths");  
+        subList.add("English");  
+        subList.add("French");  
+        subList.add("Sanskrit");
+        subList.add("Abacus");
+        System.out.println("------------Subject List--------------");  
+        subList.forEach(sub -> System.out.println(sub));  
+  }  
+}
+https://www.geeksforgeeks.org/iterators-in-java/
+--------------------------------------------------
+->Optional Class
+
+->default and static methods in Interface
+
+->method referece ::The Method reference feature introduced in Java 8 is a shorthand notation for Lambda Expressions to call a method of Functional Interface. So each time you use a Lambda Expression to refer a method, you can replace your Lambda Expression with method reference.
+-----------------------------------------------------
+->Stream API for performing bulk operations on Collections
+->Java Date Time API
+->Collection API Improvements
+->Concurrency API Improvements
+->Nashhorn JS Engine
 ===============================DESIGN PATTERNS=================
 Why we use design patterns or what is design pattern?
 A design pattern provides a general reusable solution for the common problems that occur in software design. The pattern typically shows relationships and interactions between classes or objects. ... By using design patterns, you can make your code more flexible, reusable, and maintainable.
